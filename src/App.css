@@ -1,0 +1,201 @@
+
+
+.clearfix::after {
+  display: block;
+  clear: none !important;
+  content: "";
+}
+
+.navicon {
+  width: 45px;
+  height: 45px;
+  background: transparent;
+  box-shadow: 0 5px 15px -10px transparent;
+  position: relative;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: .5s ease-in-out;
+  -moz-transition: .5s ease-in-out;
+  -o-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.menu-btn span {
+  background: #0d0d0d;
+  left: 25px;
+}
+
+.site-header.style-1 .extra-cell .profile-box .img-bx:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  margin: -0.1875rem;
+  border-radius: inherit;
+  background: linear-gradient(to right top, #f20587, #b66eec, #00a6ff, #00c6fa, #1ad9c6);
+}
+
+.svg-main-icon g [fill] {
+  fill: #f20587;
+}
+
+.site-header.style-1 .header-nav .nav > li:hover > a, .site-header.style-1 .header-nav .nav > li.active > a {
+  color: #f20587;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #434242;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.owl-carousel.owl-loaded {
+  display: block;
+}
+
+.item-carousel {
+  margin-top: -25px;
+}
+
+.owl-carousel {
+  display: none;
+  width: 100%;
+  z-index: 1;
+}
+
+.owl-carousel, .owl-carousel .owl-item {
+  -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
+  position: relative;
+}
+
+* {
+  outline: none;
+  padding: 0;
+}
+
+div {
+  display: block;
+}
+
+#search{
+  background-color: #f20587;
+  border: none;
+  position: relative;
+  top: 7px;
+}
+
+.owl-carousel .owl-stage-outer {
+  position: relative;
+  overflow: hidden;
+  -webkit-transform: translate3d(0,0,0);
+}
+
+element.style {
+  transition: all 0s ease 0s;
+  width: 1972px;
+  transform: translate3d(-229px, 0px, 0px);
+}
+
+.owl-carousel .owl-stage {
+  position: relative;
+  -ms-touch-action: pan-Y;
+}
+
+#copyright{
+  font-size: 12px;
+}
+
+.hoverable:hover{
+  box-shadow: 0 3px 3px 0 #F20587, 0 2px 2px 0px #F20587, 0 0px 0px 0 #F20587 !important;
+  cursor: pointer;
+}
+
+.item-card{
+  border-radius: 5px !important;
+}
+
+.pull-right{
+  float: right;
+}
+
+#quantity{
+  border: solid 1px #cccccc;
+  border-radius: 10px;
+  height: 40px;
+}
+
+#quantitty{
+  border: solid 1px #cccccc;
+  border-radius: 5px;
+  height: 54px;
+}
+
+#addToCartBtn{
+  float: right;
+  position: relative;
+  top: 20px;
+}
+
+#addToCartBtn:hover{
+  color: white;
+}
+
+@media (min-width: 100%) {
+  .h-custom {
+  height: 100vh !important;
+  }
+  }
+  
+  
+  .bg-grey {
+  background-color: #eae8e8;
+  }
+  
+  #checkOut{
+    background-color: #F20587;
+    color: #fff;
+    border-radius: 4px;
+    transition: all 0.6s ease 0s;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  #checkOut:hover{
+    background-color: #F20587 !important;
+    color: #fff;
+    transform: translateY(-10px);
+    box-shadow: 0px 3px 3px #F20587;
+  }
+
+  .invalid-feedback{
+    width: 100%;
+  }
+
+  #promoCode{
+    background-color: #F20587;
+    border: none;
+  }
+
+  .badge{
+    background-color: #F20587;
+  }
+
+
+.header .navbar {
+    padding: 0;
+    height: 60px;
+    width: 100%;
+}
+
+.name{
+  font-weight: 500 !important;
+  font-size: 13px !important;
+}

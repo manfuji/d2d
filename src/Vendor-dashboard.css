@@ -1,0 +1,168 @@
+.swal-button--confirm {
+    background-color: #F20587 !important;
+    color: #fff;
+    position: relative;
+    /* right: 190px; */
+    border: none;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    font-weight: 500;
+    font-size: 13px;
+    padding: 10px 24px;
+    margin: 0;
+    cursor: pointer;
+    transition: all 0.6s ease 0s;
+}
+
+.swal-button--confirm:hover{
+    background-color: #F20587 !important;
+    color: #fff;
+    transform: translateY(-10px);
+    box-shadow: 0px 3px 3px #F20587;
+}
+
+.btn-danger{
+     background-color: red !important;
+     font-weight: 500;
+    font-size: 13px;
+     border-radius: 2px;
+     color: #fff;
+     border: none;
+     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+     cursor: pointer;
+     transition: all 0.6s ease 0s;
+}
+
+
+.btn-danger:hover{
+    background-color: red !important;
+    color: #fff;
+    transform: translateY(-10px);
+    box-shadow: 0px 3px 3px red;
+}
+
+.swal-button--danger {
+    background-color: green !important;
+    font-weight: 500;
+   font-size: 13px;
+    border-radius: 2px;
+    color: #fff;
+    border: none;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.6s ease 0s;
+}
+
+.swal-button--danger:hover{
+    background-color: green !important;
+    color: #fff;
+    transform: translateY(-10px);
+    box-shadow: 0px 3px 3px green;
+}
+
+#editIcon{
+    background-color: #F20587 !important;
+    color: #fff;
+    border-radius: 2px;
+    transition: all 0.6s ease 0s;
+    box-shadow: 0px 3px 3px #F20587;
+}
+
+#editIcon:hover{
+    background-color: #F20587 !important;
+    color: #fff;
+    transform: translateY(-10px);
+    box-shadow: 0px 3px 3px #F20587;
+}
+
+.btn-success{
+    background-color: green !important;
+    color: #fff;
+    border-radius: 2px;
+    border: none !important;
+    transition: all 0.6s ease 0s;
+    box-shadow: 0px 3px 3px green;
+}
+
+.btn-success:hover{
+    background-color: green !important;
+    color: #fff;
+    transform: translateY(-10px);
+    box-shadow: 0px 3px 3px green;
+}
+
+.swal-button--cancel{
+    background-color: red !important;
+    font-weight: 500;
+    font-size: 13px !important;
+    border-radius: 2px;
+    color: #fff;
+    border: none !important;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.6s ease 0s; 
+}
+
+.swal-button--cancel:hover{
+    background-color: red !important;
+    color: #fff;
+    transform: translateY(-10px);
+    box-shadow: 0px 3px 3px red;
+}
+
+.swal-text {
+    font-size: 14px !important;
+    position: relative;
+    float: none;
+    line-height: normal;
+    vertical-align: top;
+    text-align: center;
+    display: inline-block;
+    margin: 0;
+    padding: 0 10px;
+    font-weight: 400;
+    color: rgba(0,0,0,.64);
+    max-width: calc(100% - 20px);
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+}
+
+.swal-title{
+    font-size: 20px !important;
+}
+
+.form-group label {
+    font-size: 12px !important; 
+    font-weight: 500 !important;
+}
+
+#card1, .card1{
+    padding: 0.0rem !important;
+}
+
+#card1{
+        border-bottom: solid 2px #F20587;
+        border-bottom-left-radius: 0% !important;
+        border-bottom-right-radius: 0% !important;
+        border-top-left-radius: 0% !important;
+        border-top-right-radius: 0% !important;
+        cursor: pointer;
+}
+
+#tickingForm{
+    border-bottom: solid 2px #F20587;
+    border-bottom-left-radius: 0% !important;
+    border-bottom-right-radius: 0% !important;
+    border-top-left-radius: 0% !important;
+    border-top-right-radius: 0% !important;
+    float: right !important;
+    width: 100% !important;
+}
+
+#card{
+    border-bottom: solid 2px #F20587;
+}
+
+#credit-card{
+    padding: 150px;
+}
