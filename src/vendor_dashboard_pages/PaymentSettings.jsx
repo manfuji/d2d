@@ -3,194 +3,302 @@ import { Link } from "react-router-dom";
 import "../Vendor-dashboard.css";
 // import swal from "sweetalert";
 
-
-
 class PaymentSettings extends React.Component {
-    render() {
-        return (
-            <div className="App">
-                <div id="preloader">
-                    <div class="sk-three-bounce">
-                        <div class="sk-child sk-bounce1"></div>
-                        <div class="sk-child sk-bounce2"></div>
-                        <div class="sk-child sk-bounce3"></div>
-                    </div>
+  render() {
+    return (
+      <div className="App">
+        {/* <div id="preloader">
+                <div class="sk-three-bounce">
+                    <div class="sk-child sk-bounce1"></div>
+                    <div class="sk-child sk-bounce2"></div>
+                    <div class="sk-child sk-bounce3"></div>
                 </div>
+            </div> */}
 
-                <div id="main-wrapper">
-                    <div className="content-body">
-                        {/* Row */}
-                        <div className="container-fluid">
-                            <div className="form-head d-flex mb-3 align-items-start">
-                                <div className="me-auto d-none d-lg-block">
-                                    <h3 className="font-w600 mb-0">Payment Settings</h3>
-                                    <small className="mb-0">Welcome to Your Payment settings</small>
-                                </div>
-                            </div>
-                            <hr />
-                            <div className="row">
-                                <div class="col-xl-12">
-                                    <div class="card" id="card">
-                                        {/* <div class="card-header d-block">
+        <div>
+          <div className="content-body">
+            {/* Row */}
+            <div className="container-fluid">
+              <div className="form-head d-flex mb-3 align-items-start">
+                <div className="me-auto d-none d-lg-block">
+                  <h3 className="font-w600 mb-0">Payment Settings</h3>
+                  <small className="mb-0">
+                    Welcome to Your Payment settings
+                  </small>
+                </div>
+              </div>
+              <hr />
+              <div className="row">
+                <div class="col-xl-12">
+                  <div class="card" id="card">
+                    {/* <div class="card-header d-block">
                                         <h4 class="card-title">Default Accordion</h4>
                                         <p class="m-0 subtitle">Default accordion. Add <code>accordion</code> class in root</p>
                                     </div> */}
-                                        <div class="card-body">
-                                            {/* <!-- Default accordion --> */}
+                    <div class="card-body">
+                      {/* <!-- Default accordion --> */}
 
-                                            <div class="accordion accordion-primary" id="accordion-one">
-                                                <div class="accordion-item">
-                                                    <div class="accordion-header " id="headingOne" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-controls="collapseOne" aria-expanded="true" role="button">
-                                                        <span class="accordion-header-icon"></span>
-                                                        <span class="accordion-header-text">Payment Settings</span>
-                                                        <span class="accordion-header-indicator"></span>
-                                                    </div>
-                                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-bs-parent="#accordion-one">
-                                                        <div class="accordion-body-text">
-                                                            <div class="default-tab">
-                                                                <ul class="nav nav-tabs" role="tablist">
-                                                                    <li class="nav-item">
-                                                                        <Link class="nav-link active" data-bs-toggle="tab" to="#home"><i class="la la-list me-2"></i>Mobile Money </Link>
-                                                                        
-                                                                    </li>
-                                                                    <li class="nav-item">
-                                                                        <Link class="nav-link" data-bs-toggle="tab" to="#profile"><i class="la la-credit-card me-2"></i> Bank Payment</Link>
-                                                                    </li>
-                                                                    {/* <li class="nav-item">
+                      <div
+                        class="accordion accordion-primary"
+                        id="accordion-one"
+                      >
+                        <div class="accordion-item">
+                          <div
+                            class="accordion-header "
+                            id="headingOne"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne"
+                            aria-controls="collapseOne"
+                            aria-expanded="true"
+                            role="button"
+                          >
+                            <span class="accordion-header-icon"></span>
+                            <span class="accordion-header-text">
+                              Payment Settings
+                            </span>
+                            <span class="accordion-header-indicator"></span>
+                          </div>
+                          <div
+                            id="collapseOne"
+                            class="collapse show"
+                            aria-labelledby="headingOne"
+                            data-bs-parent="#accordion-one"
+                          >
+                            <div class="accordion-body-text">
+                              <div class="default-tab">
+                                <ul class="nav nav-tabs" role="tablist">
+                                  <li class="nav-item">
+                                    <Link
+                                      class="nav-link active"
+                                      data-bs-toggle="tab"
+                                      to="#home"
+                                    >
+                                      <i class="la la-list me-2"></i>Mobile
+                                      Money{" "}
+                                    </Link>
+                                  </li>
+                                  <li class="nav-item">
+                                    <Link
+                                      class="nav-link"
+                                      data-bs-toggle="tab"
+                                      to="#profile"
+                                    >
+                                      <i class="la la-credit-card me-2"></i>{" "}
+                                      Bank Payment
+                                    </Link>
+                                  </li>
+                                  {/* <li class="nav-item">
                                                                         <Link class="nav-link" data-bs-toggle="tab" to="#contact"><i class="la la-phone me-2"></i> Contact</Link>
                                                                     </li>
                                                                     <li class="nav-item">
                                                                         <Link class="nav-link" data-bs-toggle="tab" to="#message"><i class="la la-envelope me-2"></i> Message</Link>
                                                                     </li> */}
-                                                                </ul>
-                                                                <div class="tab-content">
-                                                                    <div class="tab-pane fade show active" id="home" role="tabpanel">
-                                                                        <div class="pt-4">
-                                                                            <h4>Mobile Money</h4>
-                                                                            <hr />
-                                                                            <div className="row">
-                                                                                <div className="col-12">
-                                                                                    <div className="login-page border-0">
-                                                                                        <div className="card-body p-0">
+                                </ul>
+                                <div class="tab-content">
+                                  <div
+                                    class="tab-pane fade show active"
+                                    id="home"
+                                    role="tabpanel"
+                                  >
+                                    <div class="pt-4">
+                                      <h4>Mobile Money</h4>
+                                      <hr />
+                                      <div className="row">
+                                        <div className="col-12">
+                                          <div className="login-page border-0">
+                                            <div className="card-body p-0">
+                                              {/* <hr /> */}
+                                              <form
+                                                className="login-form mt-4 scroll"
+                                                id="style"
+                                              >
+                                                <div className="row">
+                                                  <div class="col-md-6">
+                                                    <div class="form-group position-relative">
+                                                      <h6 className="size">
+                                                        Select Network
+                                                      </h6>
+                                                      {/* <img src="images/icons/user.svg" className="fea icon-sm icons" id="okay" alt="user" /> */}
+                                                      <select
+                                                        type="text"
+                                                        class="form-control pl-5"
+                                                        placeholder=""
+                                                        name="SelectNetwork"
+                                                      >
+                                                        <option value="vodafone">
+                                                          Vodafone
+                                                        </option>
+                                                        <option value="mtn">
+                                                          MTN
+                                                        </option>
+                                                        <option value="AirtelTigo">
+                                                          AirtelTigo
+                                                        </option>
+                                                      </select>
+                                                    </div>
+                                                  </div>
+                                                  {/* <!--end col--> */}
 
-                                                                                            {/* <hr /> */}
-                                                                                            <form className="login-form mt-4 scroll" id="style">
+                                                  <div class="col-md-6">
+                                                    <div class="form-group position-relative">
+                                                      <h6 className="size">
+                                                        Name on Account
+                                                      </h6>
+                                                      {/* <img src="images/icons/user.svg" className="fea icon-sm icons" id="okay" alt="user" /> */}
+                                                      <input
+                                                        type="text"
+                                                        class="form-control pl-5"
+                                                        placeholder=""
+                                                        name="NameonAccount"
+                                                        required=""
+                                                      />
+                                                    </div>
+                                                  </div>
+                                                  {/* <!--end col--> */}
 
-                                                                                                <div className="row">
-                                                                                                    <div class="col-md-6">
-                                                                                                        <div class="form-group position-relative">
-                                                                                                            <h6 className="size">Select Network</h6>
-                                                                                                            {/* <img src="images/icons/user.svg" className="fea icon-sm icons" id="okay" alt="user" /> */}
-                                                                                                            <select type="text" class="form-control pl-5" placeholder="" name="SelectNetwork">
-                                                                                                                <option value="vodafone">Vodafone</option>
-                                                                                                                <option value="mtn">MTN</option>
-                                                                                                                <option value="AirtelTigo">AirtelTigo</option>
-                                                                                                            </select>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    {/* <!--end col--> */}
+                                                  <div class="col-md-6">
+                                                    <div class="form-group position-relative">
+                                                      <h6 className="size">
+                                                        Enter Mobile Money
+                                                        Number
+                                                      </h6>
+                                                      {/* <img src="images/icons/mail.svg" className="fea icon-sm icons" id="okay" alt="address" /> */}
+                                                      <input
+                                                        type="text"
+                                                        class="form-control pl-5"
+                                                        placeholder=""
+                                                        name="MomoNumber"
+                                                        required=""
+                                                      />
+                                                    </div>
+                                                  </div>
+                                                  {/* <!--end col--> */}
 
-                                                                                                    <div class="col-md-6">
-                                                                                                        <div class="form-group position-relative">
-                                                                                                            <h6 className="size">Name on Account</h6>
-                                                                                                            {/* <img src="images/icons/user.svg" className="fea icon-sm icons" id="okay" alt="user" /> */}
-                                                                                                            <input type="text" class="form-control pl-5" placeholder="" name="NameonAccount" required="" />
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    {/* <!--end col--> */}
+                                                  <div class="col-md-6">
+                                                    <div class="form-group position-relative">
+                                                      <h6 className="size">
+                                                        Confirm Mobile Money
+                                                        Number
+                                                      </h6>
+                                                      {/* <img src="images/icons/phone.svg" className="fea icon-sm icons" id="okay" alt="phone" /> */}
+                                                      <input
+                                                        type="text"
+                                                        class="form-control pl-5"
+                                                        placeholder=""
+                                                        name="ConfirmMomoNumber"
+                                                        required=""
+                                                      />
+                                                    </div>
+                                                  </div>
+                                                  {/* <!--end col--> */}
 
-                                                                                                    <div class="col-md-6">
-                                                                                                        <div class="form-group position-relative">
-                                                                                                            <h6 className="size">Enter Mobile Money Number</h6>
-                                                                                                            {/* <img src="images/icons/mail.svg" className="fea icon-sm icons" id="okay" alt="address" /> */}
-                                                                                                            <input type="text" class="form-control pl-5" placeholder="" name="MomoNumber" required="" />
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    {/* <!--end col--> */}
+                                                  <div className="col-lg-12 mb-0">
+                                                    <button
+                                                      className="btn btn-block"
+                                                      id="login"
+                                                    >
+                                                      {" "}
+                                                      Save Details
+                                                    </button>
+                                                  </div>
+                                                  {/* // <!--end col--> */}
+                                                </div>
+                                                {/* <!--end row--> */}
+                                              </form>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        {/*// <!--end col--> */}
+                                      </div>
+                                      {/* <!--end row--> */}
+                                    </div>
+                                  </div>
+                                  <div class="tab-pane fade" id="profile">
+                                    <div class="pt-4">
+                                      <h4>Bank Payment</h4>
+                                      <hr />
+                                      <div className="row">
+                                        <div className="col-12">
+                                          <div className="login-page border-0">
+                                            <div className="card-body p-0">
+                                              {/* <hr /> */}
+                                              <form
+                                                className="login-form mt-4 scroll"
+                                                id="style"
+                                              >
+                                                <div className="row">
+                                                  <div class="col-md-6">
+                                                    <div class="form-group position-relative">
+                                                      <h6 className="size">
+                                                        Bank Name
+                                                      </h6>
+                                                      {/* <img src="images/icons/user.svg" className="fea icon-sm icons" id="okay" alt="user" /> */}
+                                                      <input
+                                                        type="text"
+                                                        class="form-control pl-5"
+                                                        placeholder=""
+                                                        name="BankName"
+                                                        required=""
+                                                      />
+                                                    </div>
+                                                  </div>
+                                                  {/* <!--end col--> */}
 
+                                                  <div class="col-md-6">
+                                                    <div class="form-group position-relative">
+                                                      <h6 className="size">
+                                                        Name on Account
+                                                      </h6>
+                                                      {/* <img src="images/icons/user.svg" className="fea icon-sm icons" id="okay" alt="user" /> */}
+                                                      <input
+                                                        type="text"
+                                                        class="form-control pl-5"
+                                                        placeholder=""
+                                                        name="NameonAccount"
+                                                        required=""
+                                                      />
+                                                    </div>
+                                                  </div>
+                                                  {/* <!--end col--> */}
 
-                                                                                                    <div class="col-md-6">
-                                                                                                        <div class="form-group position-relative">
-                                                                                                            <h6 className="size">Confirm Mobile Money Number</h6>
-                                                                                                            {/* <img src="images/icons/phone.svg" className="fea icon-sm icons" id="okay" alt="phone" /> */}
-                                                                                                            <input type="text" class="form-control pl-5" placeholder="" name="ConfirmMomoNumber" required="" />
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    {/* <!--end col--> */}
+                                                  <div class="col-md-12">
+                                                    <div class="form-group position-relative">
+                                                      <h6 className="size">
+                                                        Branch
+                                                      </h6>
+                                                      {/* <img src="images/icons/file-text.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
+                                                      <input
+                                                        type="text"
+                                                        class="form-control pl-5"
+                                                        placeholder=""
+                                                        name="Certificate"
+                                                        required=""
+                                                      />
+                                                    </div>
+                                                  </div>
+                                                  {/* <!--end col--> */}
 
-                                                                                                    <div className="col-lg-12 mb-0">
-                                                                                                        <button className="btn btn-block" id="login"> Save Details</button>
-                                                                                                    </div>
-                                                                                                    {/* // <!--end col--> */}
-
-                                                                                                </div>
-                                                                                                {/* <!--end row--> */}
-                                                                                            </form>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                {/*// <!--end col--> */}
-                                                                            </div>
-                                                                            {/* <!--end row--> */}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="tab-pane fade" id="profile">
-                                                                        <div class="pt-4">
-                                                                            <h4>Bank Payment</h4>
-                                                                            <hr />
-                                                                            <div className="row">
-                                                                                <div className="col-12">
-                                                                                    <div className="login-page border-0">
-                                                                                        <div className="card-body p-0">
-
-                                                                                            {/* <hr /> */}
-                                                                                            <form className="login-form mt-4 scroll" id="style">
-
-                                                                                                <div className="row">
-                                                                                                    <div class="col-md-6">
-                                                                                                        <div class="form-group position-relative">
-                                                                                                            <h6 className="size">Bank Name</h6>
-                                                                                                            {/* <img src="images/icons/user.svg" className="fea icon-sm icons" id="okay" alt="user" /> */}
-                                                                                                            <input type="text" class="form-control pl-5" placeholder="" name="BankName" required="" />
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    {/* <!--end col--> */}
-
-                                                                                                    <div class="col-md-6">
-                                                                                                        <div class="form-group position-relative">
-                                                                                                            <h6 className="size">Name on Account</h6>
-                                                                                                            {/* <img src="images/icons/user.svg" className="fea icon-sm icons" id="okay" alt="user" /> */}
-                                                                                                            <input type="text" class="form-control pl-5" placeholder="" name="NameonAccount" required="" />
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    {/* <!--end col--> */}
-
-                                                                                                    <div class="col-md-12">
-                                                                                                        <div class="form-group position-relative">
-                                                                                                            <h6 className="size">Branch</h6>
-                                                                                                            {/* <img src="images/icons/file-text.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
-                                                                                                            <input type="text" class="form-control pl-5" placeholder="" name="Certificate" required="" />
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    {/* <!--end col--> */}
-
-                                                                                                    <div className="col-lg-12 mb-0">
-                                                                                                        <button className="btn btn-block" id="login">Save Details</button>
-                                                                                                    </div>
-                                                                                                    {/* // <!--end col--> */}
-
-                                                                                                </div>
-                                                                                                {/* <!--end row--> */}
-                                                                                            </form>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                {/*// <!--end col--> */}
-                                                                            </div>
-                                                                            {/* <!--end row--> */}
-                                                                        </div>
-                                                                    </div>
-                                                                    {/* <div class="tab-pane fade" id="contact">
+                                                  <div className="col-lg-12 mb-0">
+                                                    <button
+                                                      className="btn btn-block"
+                                                      id="login"
+                                                    >
+                                                      Save Details
+                                                    </button>
+                                                  </div>
+                                                  {/* // <!--end col--> */}
+                                                </div>
+                                                {/* <!--end row--> */}
+                                              </form>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        {/*// <!--end col--> */}
+                                      </div>
+                                      {/* <!--end row--> */}
+                                    </div>
+                                  </div>
+                                  {/* <div class="tab-pane fade" id="contact">
                                                                         <div class="pt-4">
                                                                             <h4>This is contact title</h4>
                                                                             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
@@ -208,11 +316,12 @@ class PaymentSettings extends React.Component {
                                                                             </p>
                                                                         </div>
                                                                     </div> */}
-                                                                </div>
-                                                            </div>                                                    </div>
-                                                    </div>
-                                                </div>
-                                                {/* <div class="accordion-item">
+                                </div>
+                              </div>{" "}
+                            </div>
+                          </div>
+                        </div>
+                        {/* <div class="accordion-item">
                                                 <div class="accordion-header collapsed rounded-lg" id="headingTwo" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-controls="collapseTwo" role="button" aria-expanded="true">
                                                     <span class="accordion-header-text">Accordion Header Two</span>
                                                     <span class="accordion-header-indicator"></span>
@@ -234,16 +343,16 @@ class PaymentSettings extends React.Component {
                                                     </div>
                                                 </div>
                                             </div> */}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
+              </div>
             </div>
-        );
-    }
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 export default PaymentSettings;

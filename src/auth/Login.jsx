@@ -6,7 +6,7 @@ const Login = () => {
   return (
     <div className="App">
       {/* PAGE LOADER STARTS */}
-      {/* <div id="preloader">
+      {/*  {/*  <div id="preloader">
                     <div id="status">
                         <div class="spinner">
                             <div class="double-bounce1"></div>
@@ -14,8 +14,8 @@ const Login = () => {
                         </div>
                     </div>
                 </div>  */}
-      {/* PAGE LOADER ENDS */}
 
+      {/* PAGE LOADER ENDS */}
       {/* Icon Leaing to Home Starts */}
       <div className="back-to-home rounded d-none d-sm-block" id="back-to-home">
         <Link to="/" className="btn btn-icon" id="homeIcon">
@@ -27,7 +27,6 @@ const Login = () => {
         </Link>
       </div>
       {/* Icon Leaing to Home Ends */}
-
       {/* <!-- Hero Start --> */}
       <section className="cover-user bg-white">
         <div className="container-fluid px-0">
