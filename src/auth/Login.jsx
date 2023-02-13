@@ -1,8 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../Auth.css";
+import { LoginApi } from "../services/api/Login.api";
+import axios from "axios";
+import { baseUrl } from "../services/config/baseUrl";
 
 const Login = () => {
+  const initialState = {
+    username: "",
+    password: "",
+  };
+  let currentUser = {};
+  const [formInput, setFormInput] = useState(initialState);
+  const onChangedHandler = (e) => {
+    setFormInput({ ...formInput, [e.target.name]: e.target.value });
+  };
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    // console.log(formInput);
+    axios
+      .post("https://www.gsdfsms.pythonanywhere.com/api/login/", formInput)
+      .then((res) => {
+        console.log(res.data);
+        currentUser = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // currentUser = await (await LoginApi(formInput)).data;
+  };
+  console.log("shasahhhhhhhshshsh", currentUser);
   return (
     <div className="App">
       {/* PAGE LOADER STARTS */}
@@ -49,12 +76,15 @@ const Login = () => {
                           Welcome to Desserts to Door
                         </h4>
                         {/* <hr /> */}
-                        <form className="login-form mt-4">
+                        <form
+                          className="login-form mt-4"
+                          onSubmit={onSubmitHandler}
+                        >
                           <div className="row">
                             <div className="col-lg-12">
                               <div className="form-group position-relative">
                                 <h6>
-                                  Your Email{" "}
+                                  Your username{" "}
                                   <span className="text-danger">*</span>
                                 </h6>
                                 <img
@@ -63,10 +93,12 @@ const Login = () => {
                                   alt="key"
                                 />
                                 <input
-                                  type="email"
+                                  type="username"
                                   className="email form-control pl-5"
-                                  placeholder="Email"
-                                  name="email"
+                                  placeholder="Username"
+                                  name="text"
+                                  value={formInput.email}
+                                  onChange={onChangedHandler}
                                   required
                                 />
                               </div>
@@ -89,7 +121,9 @@ const Login = () => {
                                   name="password"
                                   className="password form-control pl-5"
                                   placeholder="Password"
+                                  value={formInput.password}
                                   required
+                                  onChange={onChangedHandler}
                                 />
                               </div>
                             </div>

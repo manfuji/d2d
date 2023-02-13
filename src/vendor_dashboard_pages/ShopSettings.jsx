@@ -1,19 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import swal from "sweetalert";
 
 class ShopSettings extends React.Component {
   render() {
     return (
       <div className="App">
-        {/* <div id="preloader">
-                <div class="sk-three-bounce">
-                    <div class="sk-child sk-bounce1"></div>
-                    <div class="sk-child sk-bounce2"></div>
-                    <div class="sk-child sk-bounce3"></div>
-                </div>
-            </div> */}
-
         <div>
           <div className="content-body">
             {/* Row */}
@@ -23,20 +14,6 @@ class ShopSettings extends React.Component {
                   <h3 className="font-w600 mb-0">Shop Settings</h3>
                   <small className="mb-0">Welcome to Your shop settings</small>
                 </div>
-
-                {/* <div className="dropdown custom-dropdown" id="filter">
-                                <div class="btn btn-sm btn-primary light d-flex align-items-center svg-btn" data-bs-toggle="dropdown">
-                                    <div class="text-start ms-3">
-                                        <span className="d-block fs-16">In Stock</span>
-                                        <small className="d-block fs-13">Products in Stock</small>
-                                    </div>
-                                    <i class="fa fa-angle-down scale5  ms-3"></i>
-                                </div>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <Link class="dropdown-item" to="#">Yes</Link>
-                                    <Link class="dropdown-item" to="#">No</Link>
-                                </div>
-                            </div> */}
               </div>
               <hr />
               <div class="row">
@@ -74,31 +51,6 @@ class ShopSettings extends React.Component {
                 </div>
               </div>
               <div class="row">
-                {/* <div class="col-xl-4">
-                                    <div class="row">
-                                        <div class="col-xl-12">
-                                            <div class="card" id="card">
-                                                <div class="card-body">
-                                                    <div class="profile-statistics">
-                                                        <div class="text-center">
-                                                            <div class="row">
-                                                                <div class="col">
-                                                                    <h3 class="m-b-0">150</h3><span>Follower</span>
-                                                                </div>
-                                                                <div class="col">
-                                                                    <h3 class="m-b-0">140</h3><span>Place Stay</span>
-                                                                </div>
-                                                                <div class="col">
-                                                                    <h3 class="m-b-0">45</h3><span>Reviews</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> */}
                 <div class="col-xl-12">
                   <div class="card" id="card">
                     <div class="card-body">
