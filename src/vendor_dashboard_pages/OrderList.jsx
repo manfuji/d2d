@@ -1,19 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import OrderCard from "../components/vendorCard/OrderCard";
 // import { Link } from "react-router-dom";
 
 class OrderList extends React.Component {
   render() {
     return (
       <div className="App">
-        <div id="preloader">
+        {/* <div id="preloader">
           <div id="status">
             <div class="spinner">
               <div class="double-bounce1"></div>
               <div class="double-bounce2"></div>
             </div>
           </div>
-        </div>
+        </div> */}
         {/* <div id="preloader">
 					<div className="sk-three-bounce">
 						<div className="sk-child sk-bounce1"></div>
@@ -363,259 +364,12 @@ class OrderList extends React.Component {
                   </div>
                 </div>
               </div>
-
               <hr />
-
-              <div className="row">
-                <div className="me-auto d-none d-lg-block">
-                  <h3 className="text-dark font-w600 mb-0">Confirmed Orders</h3>
-                  <p className="mb-0 fs-12">
-                    Here is your Confirmeded order list data
-                  </p>
-                </div>
-
-                <div className="col-12">
-                  <br />
-                  <div className="card">
-                    <div className="card-body">
-                      <div className="table-responsive">
-                        <table
-                          id="example5"
-                          className=" table table-borderless display mb-4 dataTablesCard"
-                        >
-                          <thead>
-                            <tr>
-                              <th>Order ID</th>
-                              <th>Date</th>
-                              <th>Customer Name</th>
-                              <th>Location</th>
-                              <th>Amount</th>
-                              <th>Status Order</th>
-                              <th>Action</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>#5552351</td>
-                              <td class="w-space-no">
-                                26 March 2020, 12:42 AM
-                              </td>
-                              <td>James WItcwicky</td>
-                              <td>Corner Street 5th London</td>
-                              <td>$164.52</td>
-                              <td>
-                                <span class="text-success w-space-no">
-                                  <b>Confirmed</b>{" "}
-                                </span>
-                              </td>
-                              <td>
-                                <div class="dropdown ms-auto text-right">
-                                  <div
-                                    class="btn-link"
-                                    data-bs-toggle="dropdown"
-                                  >
-                                    <svg
-                                      width="24px"
-                                      height="24px"
-                                      viewBox="0 0 24 24"
-                                      version="1.1"
-                                    >
-                                      <g
-                                        stroke="none"
-                                        stroke-width="1"
-                                        fill="none"
-                                        fill-rule="evenodd"
-                                      >
-                                        <rect
-                                          x="0"
-                                          y="0"
-                                          width="24"
-                                          height="24"
-                                        ></rect>
-                                        <circle
-                                          fill="#000000"
-                                          cx="5"
-                                          cy="12"
-                                          r="2"
-                                        ></circle>
-                                        <circle
-                                          fill="#000000"
-                                          cx="12"
-                                          cy="12"
-                                          r="2"
-                                        ></circle>
-                                        <circle
-                                          fill="#000000"
-                                          cx="19"
-                                          cy="12"
-                                          r="2"
-                                        ></circle>
-                                      </g>
-                                    </svg>
-                                  </div>
-                                  <div class="dropdown-menu dropdown-menu-right">
-                                    <Link class="dropdown-item" to="#">
-                                      <i class="las la-check-square scale5 text-success me-2"></i>{" "}
-                                      Confirm Order
-                                    </Link>
-                                    <Link class="dropdown-item" to="#">
-                                      <i class="las la-times-circle scale5 text-danger me-2"></i>{" "}
-                                      Denial Order
-                                    </Link>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>#5552397</td>
-                              <td class="w-space-no">
-                                26 March 2020, 12:42 AM
-                              </td>
-                              <td>David Horison</td>
-                              <td>981 St. John’s Road London</td>
-                              <td>$24.55</td>
-                              <td>
-                                <span class="text-success w-space-no">
-                                  <b>Confirmed</b>{" "}
-                                </span>
-                              </td>
-                              <td>
-                                <div class="dropdown ms-auto text-right">
-                                  <div
-                                    class="btn-link"
-                                    data-bs-toggle="dropdown"
-                                  >
-                                    <svg
-                                      width="24px"
-                                      height="24px"
-                                      viewBox="0 0 24 24"
-                                      version="1.1"
-                                    >
-                                      <g
-                                        stroke="none"
-                                        stroke-width="1"
-                                        fill="none"
-                                        fill-rule="evenodd"
-                                      >
-                                        <rect
-                                          x="0"
-                                          y="0"
-                                          width="24"
-                                          height="24"
-                                        ></rect>
-                                        <circle
-                                          fill="#000000"
-                                          cx="5"
-                                          cy="12"
-                                          r="2"
-                                        ></circle>
-                                        <circle
-                                          fill="#000000"
-                                          cx="12"
-                                          cy="12"
-                                          r="2"
-                                        ></circle>
-                                        <circle
-                                          fill="#000000"
-                                          cx="19"
-                                          cy="12"
-                                          r="2"
-                                        ></circle>
-                                      </g>
-                                    </svg>
-                                  </div>
-                                  <div class="dropdown-menu dropdown-menu-right">
-                                    <Link class="dropdown-item" to="#">
-                                      <i class="las la-check-square scale5 text-success me-2"></i>{" "}
-                                      Confirm Order
-                                    </Link>
-                                    <Link class="dropdown-item" to="#">
-                                      <i class="las la-times-circle scale5 text-danger me-2"></i>{" "}
-                                      Denial Order
-                                    </Link>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>#5552397</td>
-                              <td class="w-space-no">
-                                26 March 2020, 12:42 AM
-                              </td>
-                              <td>Rendy Greenlee</td>
-                              <td>32 The Green London</td>
-                              <td>$251.16</td>
-                              <td>
-                                <span class="text-success w-space-no">
-                                  <b>Confirmed</b>{" "}
-                                </span>
-                              </td>
-                              <td>
-                                <div class="dropdown ms-auto text-right">
-                                  <div
-                                    class="btn-link"
-                                    data-bs-toggle="dropdown"
-                                  >
-                                    <svg
-                                      width="24px"
-                                      height="24px"
-                                      viewBox="0 0 24 24"
-                                      version="1.1"
-                                    >
-                                      <g
-                                        stroke="none"
-                                        stroke-width="1"
-                                        fill="none"
-                                        fill-rule="evenodd"
-                                      >
-                                        <rect
-                                          x="0"
-                                          y="0"
-                                          width="24"
-                                          height="24"
-                                        ></rect>
-                                        <circle
-                                          fill="#000000"
-                                          cx="5"
-                                          cy="12"
-                                          r="2"
-                                        ></circle>
-                                        <circle
-                                          fill="#000000"
-                                          cx="12"
-                                          cy="12"
-                                          r="2"
-                                        ></circle>
-                                        <circle
-                                          fill="#000000"
-                                          cx="19"
-                                          cy="12"
-                                          r="2"
-                                        ></circle>
-                                      </g>
-                                    </svg>
-                                  </div>
-                                  <div class="dropdown-menu dropdown-menu-right">
-                                    <Link class="dropdown-item" to="#">
-                                      <i class="las la-check-square scale5 text-success me-2"></i>{" "}
-                                      Confirm Order
-                                    </Link>
-                                    <Link class="dropdown-item" to="#">
-                                      <i class="las la-times-circle scale5 text-danger me-2"></i>{" "}
-                                      Denial Order
-                                    </Link>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
               <br />
+              <OrderCard title="Confirmed Orders" />
+              <OrderCard title="Order in Progress" />
+              <OrderCard title="Order Delivered" />
+              {/* <OrderCard /> */}
             </div>
           </div>
         </div>
