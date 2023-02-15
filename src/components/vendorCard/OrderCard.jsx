@@ -329,22 +329,18 @@ const OrderCard = ({ title }) => {
                 </div>
               </div>
 
-              {/* <hr className="horizontalLine" />
+              <hr className="horizontalLine" />
               <div className="sweetalert  ">
                 <button
                   onClick={() =>
-                    swal(
-                      "Good job!",
-                      "Package has been added successfully!",
-                      "success"
-                    )
+                    swal("Good job!", "Order approved successfully!", "success")
                   }
                   className="btn btn-primary btn-block sweet-success"
                   id="filter"
                 >
-                  Edit Product
+                  Approve
                 </button>
-              </div> */}
+              </div>
             </form>
           </Modal.Body>
           {/* <Modal.Footer></Modal.Footer> */}
