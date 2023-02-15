@@ -466,6 +466,17 @@ const OrderList = () => {
                 Approve
               </button>
             </div>
+            <div className="sweetalert  mt-2">
+              <button
+                onClick={() =>
+                  swal("Good job!", "Order declined successfully!", "success")
+                }
+                className="btn btn-danger btn-block sweet-danger"
+                id="filter"
+              >
+                Decline
+              </button>
+            </div>
           </form>
         </Modal.Body>
         {/* <Modal.Footer></Modal.Footer> */}
