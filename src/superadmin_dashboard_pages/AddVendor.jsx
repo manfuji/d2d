@@ -4,12 +4,19 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import Loader from "../components/utils/Loader";
+import MessageAlert from "../components/utils/message";
 
 const AddVendor = () => {
   const user = useSelector((state) => state.auth.user);
-
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${user.access}`,
+    },
+  };
   const [vendors, setVendors] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [created, setCreated] = useState(false);
 
   const initialstate = {
     fullname: "",
@@ -19,18 +26,21 @@ const AddVendor = () => {
     gender: "",
     dob: "",
     shop_name: "",
-    location: "",
+    latitude: "",
     registration: "",
     address: "",
-    location_map: "",
+    longitude: "",
     managers_number: 0,
     number_of_employees: 0,
     description: "",
+    profile: "",
+    username: "",
+    password: "",
   };
 
   const [formData, setFormData] = useState(initialstate);
 
-  const [logo, setLogo] = useState(null);
+  const [createdVendor, setCreatedVendor] = useState({});
   const [coverPhoto, setCoverPhoto] = useState(null);
   const [companyLogo, setcompanyLogo] = useState(null);
   const [companyRegistration, setcompanyRegistration] = useState(null);
@@ -47,24 +57,66 @@ const AddVendor = () => {
     e.preventDefault();
     const formdata = new FormData();
 
-    formdata.append({});
-    console.log(formData);
-    console.log(
-      "files",
-      coverPhoto,
-      companyLogo,
-      companyRegistration,
-      ghanaCard
-    );
+    formdata.append("ghanaCard", ghanaCard);
+    formdata.append("company_registration", companyRegistration);
+    // formdata.append("ghanaCard", ghanaCard);
+    // formdata.append("ghanaCard", ghanaCard);
+
+    formdata.append("fullname", formData.fullname);
+    formdata.append("email", formData.email);
+    formdata.append("phone_number", formData.phone_number);
+    formdata.append("gps_address", formData.gps_address);
+    formdata.append("gender", formData.gender);
+    formdata.append("dob", formData.dob);
+    formdata.append("shop_name", formData.shop_name);
+    formdata.append("latitude", formData.latitude);
+    formdata.append("registration", formData.registration);
+    formdata.append("address", formData.address);
+    formdata.append("longitude", formData.longitude);
+    formdata.append("managers_number", formData.managers_number);
+    formdata.append("number_of_employees", formData.number_of_employees);
+    formdata.append("description", formData.description);
+    formdata.append("username", formData.username);
+    formdata.append("profile", formData.profile);
+    formdata.append("password", formData.password);
+
+    console.log("========", formdata.get("email"));
+    // console.log(
+    //   "files",
+    //   coverPhoto,
+    //   companyLogo,
+    //   companyRegistration,
+    //   ghanaCard
+    // );
+
+    axios
+      .post(
+        process.env.REACT_APP_BASE_URL + "/vender-register/",
+        formdata,
+        config
+      )
+      .then((response) => {
+        setCreatedVendor(response.data);
+        // setLoading(false);
+        setCreated(true);
+        <MessageAlert
+          title={"Created"}
+          message={"Vendor created sucessfully"}
+          type={"success"}
+        />;
+      })
+      .catch((err) => (
+        <MessageAlert
+          title={"failed"}
+          message={err.data.detail}
+          type={"success"}
+        />
+      ));
   };
 
+  console.log(createdVendor);
+
   useEffect(() => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user.access}`,
-      },
-    };
     // vendors
     axios
       .get(process.env.REACT_APP_BASE_URL + "/admin/vendors", config)
@@ -79,14 +131,6 @@ const AddVendor = () => {
   if (loading) return <Loader />;
   return (
     <div className="App">
-      {/* <div id="preloader">
-                <div class="sk-three-bounce">
-                    <div class="sk-child sk-bounce1"></div>
-                    <div class="sk-child sk-bounce2"></div>
-                    <div class="sk-child sk-bounce3"></div>
-                </div>
-            </div> */}
-
       <div>
         <div className="content-body">
           {/* Row */}
@@ -202,14 +246,13 @@ const AddVendor = () => {
                                   class="form-control pl-5"
                                   placeholder=""
                                   name="fullname"
-                                  required=""
+                                  required
                                   value={formData.fullname}
                                   onChange={onchangeHandler}
                                 />
                               </div>
                             </div>
                             {/* <!--end col--> */}
-
                             <div class="col-md-6">
                               <div class="form-group position-relative">
                                 <h6 className="size">Email</h6>
@@ -219,14 +262,13 @@ const AddVendor = () => {
                                   class="form-control pl-5"
                                   placeholder=""
                                   name="email"
-                                  required=""
+                                  required
                                   value={formData.email}
                                   onChange={onchangeHandler}
                                 />
                               </div>
                             </div>
                             {/* <!--end col--> */}
-
                             <div class="col-md-6">
                               <div class="form-group position-relative">
                                 <h6 className="size">Phone Number</h6>
@@ -241,14 +283,13 @@ const AddVendor = () => {
                                   class="form-control pl-5"
                                   placeholder=""
                                   name="phone_number"
-                                  required=""
+                                  required
                                   value={formData.phone_number}
                                   onChange={onchangeHandler}
                                 />
                               </div>
                             </div>
                             {/* <!--end col--> */}
-
                             <div class="col-md-6">
                               <div class="form-group position-relative">
                                 <h6 className="size">GPS Address</h6>
@@ -257,15 +298,14 @@ const AddVendor = () => {
                                   type="text"
                                   class="form-control pl-5"
                                   placeholder=""
-                                  name="gps_address"
-                                  required=""
-                                  value={formData.gps_address}
+                                  name="latitude"
+                                  required
+                                  value={formData.latitude}
                                   onChange={onchangeHandler}
                                 />
                               </div>
                             </div>
                             {/* <!--end col--> */}
-
                             <div class="col-md-6">
                               <div class="form-group position-relative">
                                 <h6 className="size">Gender</h6>
@@ -275,14 +315,13 @@ const AddVendor = () => {
                                   class="form-control pl-5"
                                   placeholder=""
                                   name="gender"
-                                  required=""
+                                  required
                                   value={formData.gender}
                                   onChange={onchangeHandler}
                                 />
                               </div>
                             </div>
                             {/* <!--end col--> */}
-
                             <div class="col-md-6">
                               <div class="form-group position-relative">
                                 <h6 className="size">Date of Birth</h6>
@@ -292,14 +331,13 @@ const AddVendor = () => {
                                   class="form-control pl-5"
                                   placeholder=""
                                   name="dob"
-                                  required=""
+                                  required
                                   value={formData.dob}
                                   onChange={onchangeHandler}
                                 />
                               </div>
                             </div>
                             {/* <!--end col--> */}
-
                             <div class="col-md-6">
                               <div class="form-group position-relative">
                                 <h6 className="size">Shop Name</h6>
@@ -309,14 +347,13 @@ const AddVendor = () => {
                                   class="form-control pl-5"
                                   placeholder=""
                                   name="shop_name"
-                                  required=""
+                                  required
                                   value={formData.shop_name}
                                   onChange={onchangeHandler}
                                 />
                               </div>
                             </div>
                             {/* <!--end col--> */}
-
                             <div class="col-md-6">
                               <div class="form-group position-relative">
                                 <h6 className="size">Shop Location</h6>
@@ -325,15 +362,14 @@ const AddVendor = () => {
                                   type="text"
                                   class="form-control pl-5"
                                   placeholder=""
-                                  name="location"
-                                  required=""
-                                  value={formData.location}
+                                  name="longitude"
+                                  required
+                                  value={formData.longitude}
                                   onChange={onchangeHandler}
                                 />
                               </div>
                             </div>
                             {/* <!--end col--> */}
-
                             <div class="col-md-6">
                               <div class="form-group position-relative">
                                 <h6 className="size">
@@ -345,14 +381,13 @@ const AddVendor = () => {
                                   class="form-control pl-5"
                                   placeholder=""
                                   name="registration"
-                                  required=""
+                                  required
                                   value={formData.registration}
                                   onChange={onchangeHandler}
                                 />
                               </div>
                             </div>
                             {/* <!--end col--> */}
-
                             <div class="col-md-6">
                               <div class="form-group position-relative">
                                 <h6 className="size">Address</h6>
@@ -362,14 +397,13 @@ const AddVendor = () => {
                                   class="form-control pl-5"
                                   placeholder=""
                                   name="address"
-                                  required=""
+                                  required
                                   value={formData.address}
                                   onChange={onchangeHandler}
                                 />
                               </div>
                             </div>
-                            {/* <!--end col--> */}
-
+                            {/* <!--end col--> */} {/* <!--end col--> */}
                             <div class="col-md-6">
                               <div class="form-group position-relative">
                                 <h6 className="size">Location on Map</h6>
@@ -379,14 +413,45 @@ const AddVendor = () => {
                                   class="form-control pl-5"
                                   placeholder=""
                                   name="gps_address"
-                                  required=""
+                                  required
                                   value={formData.gps_address}
                                   onChange={onchangeHandler}
                                 />
                               </div>
                             </div>
                             {/* <!--end col--> */}
-
+                            <div class="col-md-6">
+                              <div class="form-group position-relative">
+                                <h6 className="size">Username</h6>
+                                {/* <img src="images/icons/map-pin.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
+                                <input
+                                  type="text"
+                                  class="form-control pl-5"
+                                  placeholder=""
+                                  name="username"
+                                  required
+                                  value={formData.username}
+                                  onChange={onchangeHandler}
+                                />
+                              </div>
+                            </div>
+                            {/* <!--end col--> */}{" "}
+                            <div class="col-md-6">
+                              <div class="form-group position-relative">
+                                <h6 className="size">Password</h6>
+                                {/* <img src="images/icons/map-pin.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
+                                <input
+                                  type="text"
+                                  class="form-control pl-5"
+                                  placeholder=""
+                                  name="password"
+                                  required
+                                  value={formData.password}
+                                  onChange={onchangeHandler}
+                                />
+                              </div>
+                            </div>
+                            {/* <!--end col--> */}
                             <div class="col-md-6">
                               <div class="form-group position-relative">
                                 <h6 className="size">Number of Employees</h6>
@@ -396,14 +461,13 @@ const AddVendor = () => {
                                   class="form-control pl-5"
                                   placeholder=""
                                   name="number_of_employees"
-                                  required=""
+                                  required
                                   value={formData.number_of_employees}
                                   onChange={onchangeHandler}
                                 />
                               </div>
                             </div>
                             {/* <!--end col--> */}
-
                             {/* <div class="col-md-6">
                               <div class="form-group position-relative">
                                 <h6 className="size">Next in Command</h6>
@@ -412,14 +476,13 @@ const AddVendor = () => {
                                   class="form-control pl-5"
                                   placeholder=""
                                   name="NextinCommand"
-                                  required=""
+                                  required
                                   value={formData.phone_number}
                                   onChange={onchangeHandler}
                                 />
                               </div>
                             </div> */}
                             {/* <!--end col--> */}
-
                             <div class="col-md-6">
                               <div class="form-group position-relative">
                                 <h6 className="size">Manager’s Number</h6>
@@ -429,14 +492,13 @@ const AddVendor = () => {
                                   class="form-control pl-5"
                                   placeholder=""
                                   name="managers_number"
-                                  required=""
+                                  required
                                   value={formData.managers_number}
                                   onChange={onchangeHandler}
                                 />
                               </div>
                             </div>
                             {/* <!--end col--> */}
-
                             <div class="col-md-12">
                               <div class="form-group position-relative">
                                 <h6 className="size">Cover Photo</h6>
@@ -446,7 +508,7 @@ const AddVendor = () => {
                                   class="form-control pl-5"
                                   placeholder=""
                                   name="Certificate"
-                                  required=""
+                                  required
                                   onChange={(e) =>
                                     setCoverPhoto(e.target.files[0])
                                   }
@@ -454,7 +516,6 @@ const AddVendor = () => {
                               </div>
                             </div>
                             {/* <!--end col--> */}
-
                             <div class="col-md-12">
                               <div class="form-group position-relative">
                                 <h6 className="size">Owner Ghana Card </h6>
@@ -464,7 +525,7 @@ const AddVendor = () => {
                                   class="form-control pl-5"
                                   placeholder=""
                                   name="Certificate"
-                                  required=""
+                                  required
                                   onChange={(e) =>
                                     setGhanaCard(e.target.files[0])
                                   }
@@ -472,7 +533,6 @@ const AddVendor = () => {
                               </div>
                             </div>
                             {/* <!--end col--> */}
-
                             <div class="col-md-12">
                               <div class="form-group position-relative">
                                 <h6 className="size">Company's Certificate</h6>
@@ -482,7 +542,7 @@ const AddVendor = () => {
                                   class="form-control pl-5"
                                   placeholder=""
                                   name="Certificate"
-                                  required=""
+                                  required
                                   onChange={(e) =>
                                     setcompanyRegistration(e.target.files[0])
                                   }
@@ -490,19 +550,8 @@ const AddVendor = () => {
                               </div>
                             </div>
                             {/* <!--end col--> */}
-
                             <div className="col-lg-12 mb-0">
-                              <button
-                                onClick={() =>
-                                  swal(
-                                    "Good job!",
-                                    "You clicked the button!",
-                                    "success"
-                                  )
-                                }
-                                className="btn btn-block"
-                                id="login"
-                              >
+                              <button className="btn btn-block" id="login">
                                 Add Vendor
                               </button>
                             </div>
@@ -550,7 +599,7 @@ const AddVendor = () => {
                                     class="form-control pl-5"
                                     placeholder=""
                                     name="Fullname"
-                                    required=""
+                                    required
                                   />
                                 </div>
                               </div>
@@ -565,7 +614,7 @@ const AddVendor = () => {
                                     class="form-control pl-5"
                                     placeholder=""
                                     name="Email"
-                                    required=""
+                                    required
                                   />
                                 </div>
                               </div>
@@ -585,7 +634,7 @@ const AddVendor = () => {
                                     class="form-control pl-5"
                                     placeholder=""
                                     name="PhoneNumber"
-                                    required=""
+                                    required
                                   />
                                 </div>
                               </div>
@@ -600,7 +649,7 @@ const AddVendor = () => {
                                     class="form-control pl-5"
                                     placeholder=""
                                     name="GpsAddress"
-                                    required=""
+                                    required
                                   />
                                 </div>
                               </div>
@@ -615,7 +664,7 @@ const AddVendor = () => {
                                     class="form-control pl-5"
                                     placeholder=""
                                     name="gender"
-                                    required=""
+                                    required
                                   />
                                 </div>
                               </div>
@@ -630,7 +679,7 @@ const AddVendor = () => {
                                     class="form-control pl-5"
                                     placeholder=""
                                     name="Dob"
-                                    required=""
+                                    required
                                   />
                                 </div>
                               </div>
@@ -645,7 +694,7 @@ const AddVendor = () => {
                                     class="form-control pl-5"
                                     placeholder=""
                                     name="ShopName"
-                                    required=""
+                                    required
                                   />
                                 </div>
                               </div>
@@ -660,7 +709,7 @@ const AddVendor = () => {
                                     class="form-control pl-5"
                                     placeholder=""
                                     name="shoplocation"
-                                    required=""
+                                    required
                                   />
                                 </div>
                               </div>
@@ -677,7 +726,7 @@ const AddVendor = () => {
                                     class="form-control pl-5"
                                     placeholder=""
                                     name="ShopRegistration"
-                                    required=""
+                                    required
                                   />
                                 </div>
                               </div>
@@ -692,7 +741,7 @@ const AddVendor = () => {
                                     class="form-control pl-5"
                                     placeholder=""
                                     name="Address"
-                                    required=""
+                                    required
                                   />
                                 </div>
                               </div>
@@ -707,7 +756,7 @@ const AddVendor = () => {
                                     class="form-control pl-5"
                                     placeholder=""
                                     name="locationonMap"
-                                    required=""
+                                    required
                                   />
                                 </div>
                               </div>
@@ -722,7 +771,7 @@ const AddVendor = () => {
                                     class="form-control pl-5"
                                     placeholder=""
                                     name="NumberEmployees"
-                                    required=""
+                                    required
                                   />
                                 </div>
                               </div>
@@ -737,7 +786,7 @@ const AddVendor = () => {
                                     class="form-control pl-5"
                                     placeholder=""
                                     name="NextinCommand"
-                                    required=""
+                                    required
                                   />
                                 </div>
                               </div>
@@ -752,7 +801,7 @@ const AddVendor = () => {
                                     class="form-control pl-5"
                                     placeholder=""
                                     name="ManagerNumber"
-                                    required=""
+                                    required
                                   />
                                 </div>
                               </div>
@@ -767,7 +816,7 @@ const AddVendor = () => {
                                     class="form-control pl-5"
                                     placeholder=""
                                     name="Certificate"
-                                    required=""
+                                    required
                                   />
                                 </div>
                               </div>
@@ -782,7 +831,7 @@ const AddVendor = () => {
                                     class="form-control pl-5"
                                     placeholder=""
                                     name="Certificate"
-                                    required=""
+                                    required
                                   />
                                 </div>
                               </div>
@@ -799,7 +848,7 @@ const AddVendor = () => {
                                     class="form-control pl-5"
                                     placeholder=""
                                     name="Certificate"
-                                    required=""
+                                    required
                                   />
                                 </div>
                               </div>
@@ -814,7 +863,7 @@ const AddVendor = () => {
                                     class="form-control pl-5"
                                     placeholder=""
                                     name="Username"
-                                    required=""
+                                    required
                                   />
                                 </div>
                               </div>
@@ -829,7 +878,7 @@ const AddVendor = () => {
                                     class="form-control pl-5"
                                     placeholder=""
                                     name="Password"
-                                    required=""
+                                    required
                                   />
                                 </div>
                               </div>
