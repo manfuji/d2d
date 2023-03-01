@@ -1,5 +1,5 @@
 export const initialUserState = {
-  user: [],
+  user: null,
   token: null,
   userProfile: null,
 };

@@ -1,16 +1,21 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../Auth.css";
-import { LoginApi } from "../services/api/Login.api";
+// import { LoginApi } from "../services/api/Login.api";
 import axios from "axios";
-import { baseUrl } from "../services/config/baseUrl";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../redux/slices/auth";
+// import { baseUrl } from "../services/config/baseUrl";
 
 const Login = () => {
   const initialState = {
     username: "",
     password: "",
   };
-  let currentUser = {};
+  let [currentUser, setCurrentUser] = useState();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
   const [formInput, setFormInput] = useState(initialState);
   const onChangedHandler = (e) => {
     setFormInput({ ...formInput, [e.target.name]: e.target.value });
@@ -19,31 +24,36 @@ const Login = () => {
     e.preventDefault();
     // console.log(formInput);
     axios
-      .post("https://www.gsdfsms.pythonanywhere.com/api/login/", formInput)
+      .post(process.env.REACT_APP_BASE_URL + "/login/", formInput)
       .then((res) => {
         console.log(res.data);
-        currentUser = res.data;
+        dispatch(setUser(res.data));
+        setCurrentUser(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
     // currentUser = await (await LoginApi(formInput)).data;
   };
-  console.log("shasahhhhhhhshshsh", currentUser);
+  useEffect(() => {
+    if (user && user.is_superuser) {
+      navigate("/superadmin_dashboard");
+      console.log("===================1", user);
+    }
+    if (user && user.is_vendor) {
+      navigate("/dashboard");
+      console.log("===================2", user);
+    }
+    if (user && user.is_user) {
+      navigate("/users-dashboard");
+      console.log("===================3", user);
+    }
+    // if (user && user.is_superadmin) return navigate("/superadmin");
+  }, [user, navigate]);
+
+  console.log("shasahhhhhhhshshsh", user);
   return (
     <div className="App">
-      {/* PAGE LOADER STARTS */}
-      {/*  {/*  <div id="preloader">
-                    <div id="status">
-                        <div class="spinner">
-                            <div class="double-bounce1"></div>
-                            <div class="double-bounce2"></div>
-                        </div>
-                    </div>
-                </div>  */}
-
-      {/* PAGE LOADER ENDS */}
-      {/* Icon Leaing to Home Starts */}
       <div className="back-to-home rounded d-none d-sm-block" id="back-to-home">
         <Link to="/" className="btn btn-icon" id="homeIcon">
           <img
@@ -78,6 +88,7 @@ const Login = () => {
                         {/* <hr /> */}
                         <form
                           className="login-form mt-4"
+                          style={{ marginBottom: "200px" }}
                           onSubmit={onSubmitHandler}
                         >
                           <div className="row">
@@ -96,8 +107,8 @@ const Login = () => {
                                   type="username"
                                   className="email form-control pl-5"
                                   placeholder="Username"
-                                  name="text"
-                                  value={formInput.email}
+                                  name="username"
+                                  value={formInput.username}
                                   onChange={onChangedHandler}
                                   required
                                 />

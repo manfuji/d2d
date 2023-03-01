@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 
 // All Pages Layouts Starts
 import AuthLayout from "./auth/AuthLayout";
@@ -56,69 +56,89 @@ import ManageStaff from "./superadmin_dashboard_pages/ManageStaff";
 import UsersDashboard from "./users_dashboard_pages/UsersDashboard";
 import AccountInfo from "./users_dashboard_pages/AccountInfo";
 import UsersSettingsPage from "./users_dashboard_pages/UserSettingsPage";
-import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import { Provider, useSelector } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import store from "./redux/store";
+import persistStore from "redux-persist/es/persistStore";
 // Users Dashboard Pages Routes Ends
 
 export default function App() {
+  const user = useSelector((state) => state.auth.user);
+
   return (
     <BrowserRouter>
       <Routes>
-        {/* Auth Routes */}
-        <Route path="/" element={<AuthLayout />}>
-          <Route index element={<Login />} />
-          <Route path="recover-password" element={<ForgottenPassword />} />
-          <Route path="sign-up" element={<Signup />} />
-        </Route>
-
-        {/* Vendor Dashboard Routes */}
-        <Route path="/" element={<VendorDashboardLayout />}>
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="orders" element={<Orders />} />
-          <Route path="order-list" element={<OrderList />} />
-          <Route path="add-products" element={<AddProduct />} />
-          <Route path="edit-products" element={<EditProducts />} />
-          <Route path="add-new-package" element={<AddNewPackage />} />
-          <Route path="add-offer" element={<AddOffer />} />
-          <Route path="wallet" element={<Wallet />} />
-          <Route path="tickets" element={<Tickets />} />
-          <Route path="recent-riders" element={<RecentRiders />} />
-          <Route path="shop-settings" element={<ShopSettings />} />
-          <Route path="profile-settings" element={<ProfileSettings />} />
-          <Route path="payment-settings" element={<PaymentSettings />} />
-          <Route path="request-withdrawal" element={<RequestWithdrawal />} />
-        </Route>
-
-        {/* Superadmin Pages Routes  */}
-        <Route path="/" element={<SuperadminDashboardLayout />}>
-          <Route
-            path="superadmin_dashboard"
-            element={<SuperadminDashboard />}
-          />
-          <Route path="user-report" element={<UserReport />} />
-          <Route path="financial-report" element={<FinancialReport />} />
-          <Route path="system-report" element={<SystemReport />} />
-          <Route path="withdrawals" element={<Withdrawals />} />
-          <Route path="announcements" element={<Announcements />} />
-          <Route path="access-tickets" element={<AccessTickets />} />
-          <Route path="add-vendor" element={<AddVendor />} />
-          <Route path="manage-vendors" element={<ManageVendors />} />
-          <Route path="approve-vendors" element={<ApproveVendors />} />
-          <Route path="add-user" element={<AddUser />} />
-          <Route path="manage-users" element={<ManageUsers />} />
-          <Route path="add-rider" element={<AddRider />} />
-          <Route path="manage-riders" element={<ManageRider />} />
-          <Route path="approve-rider" element={<ApproveRider />} />
-          <Route path="add-staff" element={<AddStaff />} />
-          <Route path="manage-staffs" element={<ManageStaff />} />
-        </Route>
-
-        {/* Users Pages Routes  */}
-        <Route path="/" element={<UsersDashboardLayout />}>
-          <Route path="users-dashboard" element={<UsersDashboard />} />
-          <Route path="account-info" element={<AccountInfo />} />
-          <Route path="user-settings" element={<UsersSettingsPage />} />
-        </Route>
+        {!user && (
+          <>
+            {/* Auth Routes */}
+            <Route path="/" element={<AuthLayout />}>
+              <Route index element={<Login />} />
+              <Route path="recover-password" element={<ForgottenPassword />} />
+              <Route path="sign-up" element={<Signup />} />
+            </Route>
+          </>
+        )}
+        {user && user.is_vendor ? (
+          <>
+            {/* Vendor Dashboard Routes */}
+            <Route path="/" element={<VendorDashboardLayout />}>
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="orders" element={<Orders />} />
+              <Route path="order-list" element={<OrderList />} />
+              <Route path="add-products" element={<AddProduct />} />
+              <Route path="edit-products" element={<EditProducts />} />
+              <Route path="add-new-package" element={<AddNewPackage />} />
+              <Route path="add-offer" element={<AddOffer />} />
+              <Route path="wallet" element={<Wallet />} />
+              <Route path="tickets" element={<Tickets />} />
+              <Route path="recent-riders" element={<RecentRiders />} />
+              <Route path="shop-settings" element={<ShopSettings />} />
+              <Route path="profile-settings" element={<ProfileSettings />} />
+              <Route path="payment-settings" element={<PaymentSettings />} />
+              <Route
+                path="request-withdrawal"
+                element={<RequestWithdrawal />}
+              />
+            </Route>
+          </>
+        ) : user && user.is_superuser ? (
+          <>
+            {/* Superadmin Pages Routes  */}
+            <Route path="/" element={<SuperadminDashboardLayout />}>
+              <Route
+                path="superadmin_dashboard"
+                element={<SuperadminDashboard />}
+              />
+              <Route path="user-report" element={<UserReport />} />
+              <Route path="financial-report" element={<FinancialReport />} />
+              <Route path="system-report" element={<SystemReport />} />
+              <Route path="withdrawals" element={<Withdrawals />} />
+              <Route path="announcements" element={<Announcements />} />
+              <Route path="access-tickets" element={<AccessTickets />} />
+              <Route path="add-vendor" element={<AddVendor />} />
+              <Route path="manage-vendors" element={<ManageVendors />} />
+              <Route path="approve-vendors" element={<ApproveVendors />} />
+              <Route path="add-user" element={<AddUser />} />
+              <Route path="manage-users" element={<ManageUsers />} />
+              <Route path="add-rider" element={<AddRider />} />
+              <Route path="manage-riders" element={<ManageRider />} />
+              <Route path="approve-rider" element={<ApproveRider />} />
+              <Route path="add-staff" element={<AddStaff />} />
+              <Route path="manage-staffs" element={<ManageStaff />} />
+            </Route>
+          </>
+        ) : user && user.is_user ? (
+          <>
+            {/* Users Pages Routes  */}
+            <Route path="/" element={<UsersDashboardLayout />}>
+              <Route path="users-dashboard" element={<UsersDashboard />} />
+              <Route path="account-info" element={<AccountInfo />} />
+              <Route path="user-settings" element={<UsersSettingsPage />} />
+            </Route>
+          </>
+        ) : (
+          ""
+        )}
       </Routes>
     </BrowserRouter>
   );
@@ -129,7 +149,9 @@ export default function App() {
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <PersistGate loading={null} persistor={persistStore(store)}>
+      <App />
+    </PersistGate>
   </Provider>,
   document.getElementById("root")
 );

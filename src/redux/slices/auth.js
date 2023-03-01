@@ -15,4 +15,6 @@ const LoginAuth = createSlice({
   },
 });
 
+export const { setUser } = LoginAuth.actions;
+
 export default LoginAuth.reducer;

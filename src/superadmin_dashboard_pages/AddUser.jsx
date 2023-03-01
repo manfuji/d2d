@@ -211,36 +211,6 @@ class AddUser extends React.Component {
                               </div>
                               {/* <!--end col--> */}
 
-                              <div class="col-md-12">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">Cover Photo</h6>
-                                  {/* <img src="images/icons/file-text.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
-                                  <input
-                                    type="file"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="Certificate"
-                                    required=""
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-
-                              <div class="col-md-12">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">Owner Ghana Card </h6>
-                                  {/* <img src="images/icons/file-text.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
-                                  <input
-                                    type="file"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="Certificate"
-                                    required=""
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-
                               <div class="col-md-6">
                                 <div class="form-group position-relative">
                                   <h6 className="size">Username</h6>
@@ -406,40 +376,10 @@ class AddUser extends React.Component {
                                     <h6 className="size">Date of Birth</h6>
                                     {/* <img src="images/icons/shop.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
                                     <input
-                                      type="text"
+                                      type="date"
                                       class="form-control pl-5"
                                       placeholder=""
                                       name="Dob"
-                                      required=""
-                                    />
-                                  </div>
-                                </div>
-                                {/* <!--end col--> */}
-
-                                <div class="col-md-12">
-                                  <div class="form-group position-relative">
-                                    <h6 className="size">Cover Photo</h6>
-                                    {/* <img src="images/icons/file-text.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
-                                    <input
-                                      type="file"
-                                      class="form-control pl-5"
-                                      placeholder=""
-                                      name="Certificate"
-                                      required=""
-                                    />
-                                  </div>
-                                </div>
-                                {/* <!--end col--> */}
-
-                                <div class="col-md-12">
-                                  <div class="form-group position-relative">
-                                    <h6 className="size">Owner Ghana Card </h6>
-                                    {/* <img src="images/icons/file-text.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
-                                    <input
-                                      type="file"
-                                      class="form-control pl-5"
-                                      placeholder=""
-                                      name="Certificate"
                                       required=""
                                     />
                                   </div>
