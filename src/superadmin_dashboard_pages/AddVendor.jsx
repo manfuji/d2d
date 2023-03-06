@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import Loader from "../components/utils/Loader";
 import MessageAlert from "../components/utils/message";
@@ -17,7 +17,13 @@ const AddVendor = () => {
   const [vendors, setVendors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [created, setCreated] = useState(false);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!user || !user.is_superuser) {
+      return navigate("/");
+    }
+  }, [user]);
   const initialstate = {
     fullname: "",
     email: "",
@@ -121,7 +127,7 @@ const AddVendor = () => {
     axios
       .get(process.env.REACT_APP_BASE_URL + "/admin/vendors", config)
       .then((response) => {
-        setVendors(response.data);
+        setVendors(response.data.results);
         setLoading(false);
       })
       .catch((err) => console.log(err));

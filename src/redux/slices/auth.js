@@ -11,10 +11,14 @@ const LoginAuth = createSlice({
     setUser: (state, action) => {
       console.log(action.payload);
       state.user = action.payload;
+      localStorage.removeItem("persist:root");
+    },
+    logout: (state, action) => {
+      state.user = null;
     },
   },
 });
 
-export const { setUser } = LoginAuth.actions;
+export const { setUser, logout } = LoginAuth.actions;
 
 export default LoginAuth.reducer;

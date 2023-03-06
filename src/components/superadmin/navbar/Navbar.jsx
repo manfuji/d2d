@@ -1,9 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { logout } from "../../../redux/slices/auth";
 
 function Navbar() {
   const user = useSelector((state) => state.auth.user);
+  const disptach = useDispatch();
   console.log(user);
   return (
     <>
@@ -1091,7 +1093,13 @@ function Navbar() {
                       </svg>
                       <span class="ms-2">Inbox </span>
                     </Link>
-                    <Link to="/" class="dropdown-item ai-icon">
+                    <span
+                      onClick={() => {
+                        disptach(logout());
+                      }}
+                      class="dropdown-item ai-icon "
+                      style={{ cursor: "pointer" }}
+                    >
                       <svg
                         id="icon-logout"
                         class="text-danger"
@@ -1109,7 +1117,7 @@ function Navbar() {
                         <line x1="21" y1="12" x2="9" y2="12"></line>
                       </svg>
                       <span class="ms-2">Logout </span>
-                    </Link>
+                    </span>
                   </div>
                 </li>
               </ul>

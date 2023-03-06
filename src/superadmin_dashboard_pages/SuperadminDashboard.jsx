@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../SuperAdmin.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -7,12 +7,17 @@ import Loader from "../components/utils/Loader";
 
 const SuperadminDashboard = () => {
   const user = useSelector((state) => state.auth.user);
+
   const [users, setUsers] = useState([]);
   const [riders, setRiders] = useState([]);
   const [vendors, setVendors] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if (!user) {
+      return navigate("/");
+    }
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -38,7 +43,7 @@ const SuperadminDashboard = () => {
     axios
       .get(process.env.REACT_APP_BASE_URL + "/admin/vendors", config)
       .then((response) => {
-        setVendors(response.data);
+        setVendors(response.data.results);
         setLoading(false);
       })
       .catch((err) => console.log(err));
@@ -220,7 +225,7 @@ const SuperadminDashboard = () => {
                       </span>
                       <div class="media-body">
                         <h3 class="mb-0 text-black">
-                          <span class="counter ms-0">{users.length}</span>
+                          <span class="counter ms-0">{users?.length}</span>
                         </h3>
                         <p class="mb-0 myTextSize">Total Users</p>
                       </div>
@@ -237,7 +242,7 @@ const SuperadminDashboard = () => {
                       </span>
                       <div class="media-body">
                         <h3 class="mb-0 text-black">
-                          <span class="counter ms-0">{vendors.length}</span>
+                          <span class="counter ms-0">{vendors?.length}</span>
                         </h3>
                         <p class="mb-0 myTextSize">Total Vendors</p>
                       </div>
@@ -327,63 +332,64 @@ const SuperadminDashboard = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {vendors?.map((vendor) => (
-                            <>
-                              <tr key={vendor?.id}>
-                                <td>
-                                  <div class="custom-control custom-checkbox checkbox-success check-lg me-3">
-                                    <input
-                                      type="checkbox"
-                                      class="custom-control-input"
-                                      id="customCheckBox2"
-                                      required=""
-                                    />
-                                    <label
-                                      class="custom-control-label"
-                                      for="customCheckBox2"
-                                    ></label>
-                                  </div>
-                                </td>
-                                <td>
-                                  <div class="d-flex align-items-center">
-                                    <img
-                                      src="images/avatar/Mj.jpg"
-                                      class="rounded-lg me-2"
-                                      width="24"
-                                      alt=""
-                                    />{" "}
-                                    <span class="w-space-no">
-                                      {vendor.user.username}
-                                    </span>
-                                  </div>
-                                </td>
-                                <td>
-                                  {" "}
-                                  {vendor.user.phone_number
-                                    ? vendor.user.phone_number
-                                    : "No number"}
-                                </td>
-                                <td> {vendor.user.email}</td>
-                                <td>
-                                  <div class="d-flex">
-                                    <Link
-                                      to="#"
-                                      class="btn btn-primary shadow btn-xs sharp me-1 sweet-confirm"
-                                      id="editIcon"
-                                    >
-                                      <i class="fas fa-eye"></i>
-                                    </Link>
-                                    <Link
-                                      to="#"
-                                      class="btn btn-danger shadow btn-xs sharp sweet-confirm"
-                                    >
-                                      <i class="fa fa-trash"></i>
-                                    </Link>
-                                  </div>
-                                </td>
-                              </tr>
-                            </>
-                          ))}
+                          {vendors &&
+                            vendors?.map((vendor) => (
+                              <>
+                                <tr key={vendor?.id}>
+                                  <td>
+                                    <div class="custom-control custom-checkbox checkbox-success check-lg me-3">
+                                      <input
+                                        type="checkbox"
+                                        class="custom-control-input"
+                                        id="customCheckBox2"
+                                        required=""
+                                      />
+                                      <label
+                                        class="custom-control-label"
+                                        for="customCheckBox2"
+                                      ></label>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="d-flex align-items-center">
+                                      <img
+                                        src="images/avatar/Mj.jpg"
+                                        class="rounded-lg me-2"
+                                        width="24"
+                                        alt=""
+                                      />{" "}
+                                      <span class="w-space-no">
+                                        {vendor.user.username}
+                                      </span>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    {" "}
+                                    {vendor.user.phone_number
+                                      ? vendor.user.phone_number
+                                      : "No number"}
+                                  </td>
+                                  <td> {vendor.user.email}</td>
+                                  <td>
+                                    <div class="d-flex">
+                                      <Link
+                                        to="#"
+                                        class="btn btn-primary shadow btn-xs sharp me-1 sweet-confirm"
+                                        id="editIcon"
+                                      >
+                                        <i class="fas fa-eye"></i>
+                                      </Link>
+                                      <Link
+                                        to="#"
+                                        class="btn btn-danger shadow btn-xs sharp sweet-confirm"
+                                      >
+                                        <i class="fa fa-trash"></i>
+                                      </Link>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </>
+                            ))}
                         </tbody>
                       </table>
                     </div>
