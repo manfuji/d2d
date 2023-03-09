@@ -60,6 +60,8 @@ import { Provider, useSelector } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import store from "./redux/store";
 import persistStore from "redux-persist/es/persistStore";
+import AddCategory from "./superadmin_dashboard_pages/CreateCategory";
+import PageNotFound from "./default/404";
 // Users Dashboard Pages Routes Ends
 
 export default function App() {
@@ -125,6 +127,7 @@ export default function App() {
               <Route path="approve-rider" element={<ApproveRider />} />
               <Route path="add-staff" element={<AddStaff />} />
               <Route path="manage-staffs" element={<ManageStaff />} />
+              <Route path="category" element={<AddCategory />} />
             </Route>
           </>
         ) : user && user.is_user ? (
@@ -137,7 +140,7 @@ export default function App() {
             </Route>
           </>
         ) : (
-          ""
+          <Route path="*" element={<PageNotFound />} />
         )}
       </Routes>
     </BrowserRouter>

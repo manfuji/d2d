@@ -10,7 +10,7 @@ const AddVendor = () => {
   const user = useSelector((state) => state.auth.user);
   const config = {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${user.access}`,
     },
   };
@@ -124,6 +124,13 @@ const AddVendor = () => {
 
   useEffect(() => {
     // vendors
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.access}`,
+      },
+    };
     axios
       .get(process.env.REACT_APP_BASE_URL + "/admin/vendors", config)
       .then((response) => {

@@ -1,11 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../../redux/slices/auth";
 
 function Navbar() {
   const user = useSelector((state) => state.auth.user);
   const disptach = useDispatch();
+  const navigate = useNavigate();
   console.log(user);
   return (
     <>
@@ -1096,6 +1097,7 @@ function Navbar() {
                     <span
                       onClick={() => {
                         disptach(logout());
+                        navigate("/");
                       }}
                       class="dropdown-item ai-icon "
                       style={{ cursor: "pointer" }}

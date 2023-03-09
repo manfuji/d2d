@@ -5,6 +5,8 @@ import "../Auth.css";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../redux/slices/auth";
+import Loader from "../components/utils/Loader";
+import swal from "sweetalert";
 // import { baseUrl } from "../services/config/baseUrl";
 
 const Login = () => {
@@ -17,21 +19,26 @@ const Login = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const [formInput, setFormInput] = useState(initialState);
+  const [loading, setLoaing] = useState(false);
   const onChangedHandler = (e) => {
     setFormInput({ ...formInput, [e.target.name]: e.target.value });
   };
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     // console.log(formInput);
+    setLoaing(true);
     axios
       .post(process.env.REACT_APP_BASE_URL + "/login/", formInput)
       .then((res) => {
         console.log(res.data);
         dispatch(setUser(res.data));
         setCurrentUser(res.data);
+        setLoaing(false);
       })
       .catch((err) => {
         console.log(err);
+        swal("Login!", "Invalid credentials", "error");
+        setLoaing(false);
       });
     // currentUser = await (await LoginApi(formInput)).data;
   };
@@ -50,6 +57,8 @@ const Login = () => {
     }
     // if (user && user.is_superadmin) return navigate("/superadmin");
   }, [user, navigate]);
+
+  if (loading) return <Loader />;
 
   console.log("shasahhhhhhhshshsh", user);
   return (
