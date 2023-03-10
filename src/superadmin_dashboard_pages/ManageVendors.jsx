@@ -3,11 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
-import MessageAlert from "../components/utils/message";
+import Loader from "../components/utils/Loader";
 
 const ManageVendors = () => {
-  const [createdVendor, setCreatedVendor] = useState({});
-
   const [vendors, setVendors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState();
@@ -23,20 +21,20 @@ const ManageVendors = () => {
     }
   }, []);
   const initialstate = {
-    fullname: selected?.fullname,
-    email: selected?.email,
-    phone_number: selected?.phone_number,
+    fullname: "",
+    email: "",
+    phone_number: 0,
     // gps_address: selected?.address,
-    gender: selected?.gender,
-    dob: selected?.dob,
-    shop_name: selected?.shop_name,
-    latitude: selected?.latitude,
+    gender: "",
+    dob: "",
+    shop_name: "",
+    latitude: "",
     // registration: selected?.,
-    address: selected?.address,
-    longitude: selected?.longitude,
-    managers_number: selected?.managers_number,
-    number_of_employees: selected?.number_of_employees,
-    description: selected?.longitude,
+    address: "",
+    longitude: "",
+    managers_number: 0,
+    number_of_employees: 0,
+    description: "",
     // profile: selected?.,
     // user?name: selected?.user.,
     // password: selected?.user.,
@@ -57,61 +55,142 @@ const ManageVendors = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formdata = new FormData();
-
-    formdata.append("fullname", formData.fullname);
-    formdata.append("email", formData.email);
-    formdata.append("phone_number", formData.phone_number);
-    formdata.append("gps_address", formData.gps_address);
-    formdata.append("gender", formData.gender);
-    formdata.append("dob", formData.dob);
-    formdata.append("shop_name", formData.shop_name);
-    formdata.append("latitude", formData.latitude);
-    formdata.append("registration", formData.registration);
-    formdata.append("address", formData.address);
-    formdata.append("longitude", formData.longitude);
-    formdata.append("managers_number", formData.managers_number);
-    formdata.append("number_of_employees", formData.number_of_employees);
-    formdata.append("description", formData.description);
-    formdata.append("username", formData.username);
-    formdata.append("profile", formData.profile);
-    formdata.append("password", formData.password);
-
-    console.log("========", formdata.get("email"));
-    // console.log(
-    //   "files",
-    //   coverPhoto,
-    //   companyLogo,
-    //   companyRegistration,
-    //   ghanaCard
-    // );
-
+  const HandleUpdate = (id) => {
     axios
-      .post(
-        process.env.REACT_APP_BASE_URL + "/vender-register/",
-        formdata,
+      .get(process.env.REACT_APP_BASE_URL + `/admin/vendors/${id}`, config)
+      .then((response) => {
+        setSelected(response.data);
+        console.log("========>", response.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const HandleOnUpdate = (e) => {
+    e.preventDefault();
+    const body = {
+      fullname:
+        formData.fullname !== "" ? formData.fullname : selected.fullname,
+      email: selected.user.email,
+      phone_number:
+        formData.phone_number !== ""
+          ? formData.phone_number
+          : selected.phone_number,
+      gps_address:
+        formData.gps_address !== ""
+          ? formData.gps_address
+          : selected.gps_address,
+      gender: formData.gender !== "" ? formData.gender : selected.gender,
+      dob: formData.dob !== "" ? formData.dob : selected.dob,
+      shop_name:
+        formData.shop_name !== "" ? formData.shop_name : selected.shop_name,
+      latitude:
+        formData.latitude !== "" ? formData.latitude : selected.latitude,
+      registration:
+        formData.registration !== ""
+          ? formData.registration
+          : selected.registration,
+      address: formData.address !== "" ? formData.address : selected.address,
+      longitude:
+        formData.longitude !== "" ? formData.longitude : selected.longitude,
+      managers_number:
+        formData.managers_number !== ""
+          ? formData.managers_number
+          : selected.managers_number,
+      number_of_employees:
+        formData.number_of_employees !== ""
+          ? formData.number_of_employees
+          : selected.number_of_employees,
+      description:
+        formData.description !== ""
+          ? formData.description
+          : selected.description,
+
+      username: selected.user.username,
+    };
+
+    console.log(body);
+    axios
+      .put(
+        process.env.REACT_APP_BASE_URL + `/admin/vendors/${selected.id}`,
+        body,
         config
       )
       .then((response) => {
-        setCreatedVendor(response.data);
-        // setLoading(false);
-        // setCreated(true);
-        <MessageAlert
-          title={"Created"}
-          message={"Vendor created sucessfully"}
-          type={"success"}
-        />;
+        setVendors(response.data.results);
+
+        setLoading(false);
+        swal({
+          title: "Update",
+          text: "Update successful",
+          icon: "success",
+        });
       })
-      .catch((err) => (
-        <MessageAlert
-          title={"failed"}
-          message={err.data.detail}
-          type={"success"}
-        />
-      ));
+      .catch((err) => {
+        swal({
+          title: "Update",
+          text: "Update unsuccessful",
+          icon: "error",
+        });
+
+        console.log(err);
+      });
   };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const formdata = new FormData();
+
+  //   formdata.append("fullname", formData.fullname);
+  //   formdata.append("email", formData.email);
+  //   formdata.append("phone_number", formData.phone_number);
+  //   formdata.append("gps_address", formData.gps_address);
+  //   formdata.append("gender", formData.gender);
+  //   formdata.append("dob", formData.dob);
+  //   formdata.append("shop_name", formData.shop_name);
+  //   formdata.append("latitude", formData.latitude);
+  //   formdata.append("registration", formData.registration);
+  //   formdata.append("address", formData.address);
+  //   formdata.append("longitude", formData.longitude);
+  //   formdata.append("managers_number", formData.managers_number);
+  //   formdata.append("number_of_employees", formData.number_of_employees);
+  //   formdata.append("description", formData.description);
+  //   formdata.append("username", formData.username);
+  //   formdata.append("profile", formData.profile);
+  //   formdata.append("password", formData.password);
+
+  //   console.log("========", formdata.get("email"));
+  //   // console.log(
+  //   //   "files",
+  //   //   coverPhoto,
+  //   //   companyLogo,
+  //   //   companyRegistration,
+  //   //   ghanaCard
+  //   // );
+
+  //   axios
+  //     .post(
+  //       process.env.REACT_APP_BASE_URL + "/vender-register/",
+  //       formdata,
+  //       config
+  //     )
+  //     .then((response) => {
+  //       setCreatedVendor(response.data);
+  //       // setLoading(false);
+  //       // setCreated(true);
+  //       <MessageAlert
+  //         title={"Created"}
+  //         message={"Vendor created sucessfully"}
+  //         type={"success"}
+  //       />;
+  //     })
+  //     .catch((err) => (
+  //       <MessageAlert
+  //         title={"failed"}
+  //         message={err.data.detail}
+  //         type={"success"}
+  //       />
+  //     ));
+  // };
 
   useEffect(() => {
     // vendors
@@ -125,16 +204,10 @@ const ManageVendors = () => {
   }, [user.access]);
   console.log(selected);
 
+  if (loading) return <Loader />;
+
   return (
     <div className="App">
-      {/* <div id="preloader">
-                <div class="sk-three-bounce">
-                    <div class="sk-child sk-bounce1"></div>
-                    <div class="sk-child sk-bounce2"></div>
-                    <div class="sk-child sk-bounce3"></div>
-                </div>
-            </div> */}
-
       <div>
         <div className="content-body">
           {/* Row */}
@@ -171,7 +244,11 @@ const ManageVendors = () => {
                           ></button>
                         </div>
                         <div class="modal-body">
-                          <form className="login-form mt-4 scroll" id="style">
+                          <form
+                            className="login-form mt-4 scroll"
+                            id="style"
+                            onSubmit={HandleOnUpdate}
+                          >
                             <div className="row">
                               <div class="col-md-6">
                                 <div class="form-group position-relative">
@@ -180,10 +257,9 @@ const ManageVendors = () => {
                                   <input
                                     type="text"
                                     class="form-control pl-5"
-                                    placeholder=""
+                                    placeholder={selected?.fullname}
                                     name="fullname"
-                                    required
-                                    value={selected?.fullname}
+                                    value={formData?.user?.fullname}
                                     onChange={onchangeHandler}
                                   />
                                 </div>
@@ -196,9 +272,8 @@ const ManageVendors = () => {
                                   <input
                                     type="email"
                                     class="form-control pl-5"
-                                    placeholder=""
+                                    placeholder={selected?.user?.email}
                                     name="email"
-                                    required
                                     value={formData.email}
                                     onChange={onchangeHandler}
                                   />
@@ -217,9 +292,8 @@ const ManageVendors = () => {
                                   <input
                                     type="text"
                                     class="form-control pl-5"
-                                    placeholder=""
+                                    placeholder={selected?.user?.phone_number}
                                     name="phone_number"
-                                    required
                                     value={formData.phone_number}
                                     onChange={onchangeHandler}
                                   />
@@ -233,47 +307,14 @@ const ManageVendors = () => {
                                   <input
                                     type="text"
                                     class="form-control pl-5"
-                                    placeholder=""
+                                    placeholder={selected?.latitude}
                                     name="latitude"
-                                    required
                                     value={formData.latitude}
                                     onChange={onchangeHandler}
                                   />
                                 </div>
                               </div>
-                              {/* <!--end col--> */}
-                              <div class="col-md-6">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">Gender</h6>
-                                  {/* <img src="images/icons/mail.svg" className="fea icon-sm icons" id="okay" alt="address" /> */}
-                                  <input
-                                    type="text"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="gender"
-                                    required
-                                    value={formData.gender}
-                                    onChange={onchangeHandler}
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-                              <div class="col-md-6">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">Date of Birth</h6>
-                                  {/* <img src="images/icons/shop.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
-                                  <input
-                                    type="date"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="dob"
-                                    required
-                                    value={formData.dob}
-                                    onChange={onchangeHandler}
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
+
                               <div class="col-md-6">
                                 <div class="form-group position-relative">
                                   <h6 className="size">Shop Name</h6>
@@ -281,9 +322,8 @@ const ManageVendors = () => {
                                   <input
                                     type="text"
                                     class="form-control pl-5"
-                                    placeholder=""
+                                    placeholder={selected?.shop_name}
                                     name="shop_name"
-                                    required
                                     value={formData.shop_name}
                                     onChange={onchangeHandler}
                                   />
@@ -297,32 +337,14 @@ const ManageVendors = () => {
                                   <input
                                     type="text"
                                     class="form-control pl-5"
-                                    placeholder=""
+                                    placeholder={selected?.longitude}
                                     name="longitude"
-                                    required
                                     value={formData.longitude}
                                     onChange={onchangeHandler}
                                   />
                                 </div>
                               </div>
-                              {/* <!--end col--> */}
-                              <div class="col-md-6">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">
-                                    Shop Registration Details
-                                  </h6>
-                                  {/* <img src="images/icons/phone.svg" className="fea icon-sm icons" id="okay" alt="phone" /> */}
-                                  <input
-                                    type="text"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="registration"
-                                    required
-                                    value={formData.registration}
-                                    onChange={onchangeHandler}
-                                  />
-                                </div>
-                              </div>
+
                               {/* <!--end col--> */}
                               <div class="col-md-6">
                                 <div class="form-group position-relative">
@@ -331,32 +353,14 @@ const ManageVendors = () => {
                                   <input
                                     type="text"
                                     class="form-control pl-5"
-                                    placeholder=""
+                                    placeholder={selected?.address}
                                     name="address"
-                                    required
                                     value={formData.address}
                                     onChange={onchangeHandler}
                                   />
                                 </div>
                               </div>
-                              {/* <!--end col--> */} {/* <!--end col--> */}
-                              <div class="col-md-6">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">Location on Map</h6>
-                                  {/* <img src="images/icons/map-pin.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
-                                  <input
-                                    type="text"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="gps_address"
-                                    required
-                                    value={formData.gps_address}
-                                    onChange={onchangeHandler}
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-                              {/* <!--end col--> */}
+
                               <div class="col-md-6">
                                 <div class="form-group position-relative">
                                   <h6 className="size">Number of Employees</h6>
@@ -364,59 +368,10 @@ const ManageVendors = () => {
                                   <input
                                     type="text"
                                     class="form-control pl-5"
-                                    placeholder=""
+                                    placeholder={selected?.number_of_employees}
                                     name="number_of_employees"
-                                    required
                                     value={formData.number_of_employees}
                                     onChange={onchangeHandler}
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-                              {/* <div class="col-md-6">
-                              <div class="form-group position-relative">
-                                <h6 className="size">Next in Command</h6>
-                                <input
-                                  type="text"
-                                  class="form-control pl-5"
-                                  placeholder=""
-                                  name="NextinCommand"
-                                  required
-                                  value={formData.phone_number}
-                                  onChange={onchangeHandler}
-                                />
-                              </div>
-                            </div> */}
-                              {/* <!--end col--> */}
-                              <div class="col-md-6">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">Manager’s Number</h6>
-                                  {/* <img src="images/icons/hash.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
-                                  <input
-                                    type="number"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="managers_number"
-                                    required
-                                    value={formData.managers_number}
-                                    onChange={onchangeHandler}
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-                              <div class="col-md-12">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">Cover Photo</h6>
-                                  {/* <img src="images/icons/file-text.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
-                                  <input
-                                    type="file"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="Certificate"
-                                    required
-                                    onChange={(e) =>
-                                      setCoverPhoto(e.target.files[0])
-                                    }
                                   />
                                 </div>
                               </div>
@@ -506,7 +461,7 @@ const ManageVendors = () => {
                                       id="editIcon"
                                       data-bs-toggle="modal"
                                       data-bs-target="#basicModal"
-                                      onClick={() => setSelected(vendor.user)}
+                                      onClick={() => HandleUpdate(vendor.id)}
                                     >
                                       <i class="fas fa-pencil-alt"></i>
                                     </Link>

@@ -78,9 +78,9 @@ const AddProduct = () => {
       .catch((err) => console.log(err));
 
     axios
-      .get(process.env.REACT_APP_BASE_URL + "/shop/product/")
+      .get(process.env.REACT_APP_BASE_URL + `/admin/product/?shop_id=${userId}`)
       .then((response) => {
-        setproduct(response.data);
+        setproduct(response.data.results);
         console.log(response.data);
         setLoading(false);
       })
@@ -612,7 +612,7 @@ const AddProduct = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {product.map((product) => (
+                          {product?.map((product) => (
                             <>
                               <tr key={product.id}>
                                 <td>
@@ -635,7 +635,7 @@ const AddProduct = () => {
                                 <td>
                                   <div class="d-flex align-items-center">
                                     <i class="fa fa-circle text-warning me-1"></i>{" "}
-                                    GH₵ 250
+                                    Ghc {product.price}
                                   </div>
                                 </td>
                                 <td>{product.product_size}</td>
@@ -643,60 +643,6 @@ const AddProduct = () => {
                               </tr>
                             </>
                           ))}
-                          <tr>
-                            <td>
-                              <div class="custom-control custom-checkbox checkbox-success check-lg me-3">
-                                <input
-                                  type="checkbox"
-                                  class="custom-control-input"
-                                  id="customCheckBox3"
-                                  required=""
-                                />
-                                <label
-                                  class="custom-control-label"
-                                  for="customCheckBox3"
-                                ></label>
-                              </div>
-                            </td>
-                            <td>542</td>
-                            <td>Cheese Cake</td>
-                            <td>Cheese Cake</td>
-                            <td>
-                              <div class="d-flex align-items-center">
-                                <i class="fa fa-circle text-warning me-1"></i>{" "}
-                                GH₵ 250
-                              </div>
-                            </td>
-                            <td>L</td>
-                            <td>No</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="custom-control custom-checkbox checkbox-success check-lg me-3">
-                                <input
-                                  type="checkbox"
-                                  class="custom-control-input"
-                                  id="customCheckBox4"
-                                  required=""
-                                />
-                                <label
-                                  class="custom-control-label"
-                                  for="customCheckBox4"
-                                ></label>
-                              </div>
-                            </td>
-                            <td>542</td>
-                            <td>Cheese Cake</td>
-                            <td>Cheese Cake</td>
-                            <td>
-                              <div class="d-flex align-items-center">
-                                <i class="fa fa-circle text-warning me-1"></i>{" "}
-                                GH₵ 250
-                              </div>
-                            </td>
-                            <td>L</td>
-                            <td>Yes</td>
-                          </tr>
                         </tbody>
                       </table>
                     </div>

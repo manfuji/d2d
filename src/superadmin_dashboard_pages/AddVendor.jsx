@@ -47,6 +47,8 @@ const AddVendor = () => {
   const [formData, setFormData] = useState(initialstate);
 
   const [createdVendor, setCreatedVendor] = useState({});
+  const [selectedVendor, setSelectedVendor] = useState({});
+
   const [coverPhoto, setCoverPhoto] = useState(null);
   const [companyLogo, setcompanyLogo] = useState(null);
   const [companyRegistration, setcompanyRegistration] = useState(null);
@@ -121,6 +123,16 @@ const AddVendor = () => {
   };
 
   console.log(createdVendor);
+
+  const HandleUpdate = (id) => {
+    axios
+      .get(process.env.REACT_APP_BASE_URL + `/admin/vendors/${id}`, config)
+      .then((response) => {
+        setSelectedVendor(response.data);
+        console.log("========>", response.data);
+      })
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
     // vendors
@@ -600,321 +612,128 @@ const AddVendor = () => {
                             data-bs-dismiss="modal"
                           ></button>
                         </div>
-                        <div class="modal-body">
-                          <form className="login-form mt-4 scroll" id="style">
-                            <div className="row">
-                              <div class="col-md-6">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">Full Name</h6>
-                                  {/* <img src="images/icons/user.svg" className="fea icon-sm icons" id="okay" alt="user" /> */}
-                                  <input
-                                    type="text"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="Fullname"
-                                    required
-                                  />
+                        {selectedVendor && (
+                          <div class="modal-body">
+                            <form className="login-form mt-4 scroll" id="style">
+                              <div className="row">
+                                <div class="col-md-6">
+                                  <div class="form-group position-relative">
+                                    <h6 className="size">Full Name</h6>
+                                    {/* <img src="images/icons/user.svg" className="fea icon-sm icons" id="okay" alt="user" /> */}
+                                    <span>
+                                      {selectedVendor?.user?.fullname}
+                                    </span>
+                                  </div>
+                                </div>
+                                {/* <!--end col--> */}
+
+                                <div class="col-md-6">
+                                  <div class="form-group position-relative">
+                                    <h6 className="size">Email</h6>
+                                    {/* <img src="images/icons/mail.svg" className="fea icon-sm icons" id="okay" alt="address" /> */}
+                                    <span>{selectedVendor?.user?.email}</span>
+                                  </div>
+                                </div>
+                                {/* <!--end col--> */}
+
+                                <div class="col-md-6">
+                                  <div class="form-group position-relative">
+                                    <h6 className="size">Phone Number</h6>
+                                    <span>
+                                      {selectedVendor?.user?.phone_number}
+                                    </span>
+                                  </div>
+                                </div>
+                                {/* <!--end col--> */}
+
+                                <div class="col-md-6">
+                                  <div class="form-group position-relative">
+                                    <h6 className="size">GPS Address</h6>
+                                    {/* <img src="images/icons/phone.svg" className="fea icon-sm icons" id="okay" alt="phone" /> */}
+                                    <span>{selectedVendor?.address}</span>
+                                  </div>
+                                </div>
+                                {/* <!--end col--> */}
+
+                                <div class="col-md-6">
+                                  <div class="form-group position-relative">
+                                    <h6 className="size">Gender</h6>
+                                    {/* <img src="images/icons/mail.svg" className="fea icon-sm icons" id="okay" alt="address" /> */}
+                                    <span>{selectedVendor?.user?.gender}</span>
+                                  </div>
+                                </div>
+                                {/* <!--end col--> */}
+
+                                <div class="col-md-6">
+                                  <div class="form-group position-relative">
+                                    <h6 className="size">Date of Birth</h6>
+                                    {/* <img src="images/icons/shop.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
+                                    <span>{selectedVendor?.user?.dob}</span>
+                                  </div>
+                                </div>
+                                {/* <!--end col--> */}
+
+                                <div class="col-md-6">
+                                  <div class="form-group position-relative">
+                                    <h6 className="size">Shop Name</h6>
+                                    {/* <img src="images/icons/shop.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
+                                    <span>{selectedVendor?.shop_name}</span>
+                                  </div>
+                                </div>
+                                {/* <!--end col--> */}
+
+                                {/* <!--end col--> */}
+
+                                <div class="col-md-6">
+                                  <div class="form-group position-relative">
+                                    <h6 className="size">
+                                      Shop Registration Details
+                                    </h6>
+                                    {/* <img src="images/icons/phone.svg" className="fea icon-sm icons" id="okay" alt="phone" /> */}
+                                    <span>
+                                      {selectedVendor?.user?.fullname}
+                                    </span>
+                                  </div>
+                                </div>
+
+                                {/* <!--end col--> */}
+
+                                <div class="col-md-6">
+                                  <div class="form-group position-relative">
+                                    <h6 className="size">
+                                      Number of Employees
+                                    </h6>
+                                    {/* <img src="images/icons/shop.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
+                                    <span>
+                                      {selectedVendor?.number_of_employees}
+                                    </span>
+                                  </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                  <div class="form-group position-relative">
+                                    <h6 className="size">Manager’s Number</h6>
+                                    {/* <img src="images/icons/hash.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
+                                    <span>
+                                      {selectedVendor?.user?.managers_number}
+                                    </span>
+                                  </div>
+                                </div>
+                                {/* <!--end col--> */}
+
+                                <div class="col-md-6">
+                                  <div class="form-group position-relative">
+                                    <h6 className="size">Username</h6>
+                                    <span>
+                                      {selectedVendor?.user?.username}
+                                    </span>
+                                  </div>
                                 </div>
                               </div>
-                              {/* <!--end col--> */}
-
-                              <div class="col-md-6">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">Email</h6>
-                                  {/* <img src="images/icons/mail.svg" className="fea icon-sm icons" id="okay" alt="address" /> */}
-                                  <input
-                                    type="email"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="Email"
-                                    required
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-
-                              <div class="col-md-6">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">Phone Number</h6>
-                                  <img
-                                    src="images/icons/phone.svg"
-                                    className="fea icon-sm icons"
-                                    id="okay"
-                                    alt="phone"
-                                  />
-                                  <input
-                                    type="text"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="PhoneNumber"
-                                    required
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-
-                              <div class="col-md-6">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">GPS Address</h6>
-                                  {/* <img src="images/icons/phone.svg" className="fea icon-sm icons" id="okay" alt="phone" /> */}
-                                  <input
-                                    type="text"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="GpsAddress"
-                                    required
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-
-                              <div class="col-md-6">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">Gender</h6>
-                                  {/* <img src="images/icons/mail.svg" className="fea icon-sm icons" id="okay" alt="address" /> */}
-                                  <input
-                                    type="email"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="gender"
-                                    required
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-
-                              <div class="col-md-6">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">Date of Birth</h6>
-                                  {/* <img src="images/icons/shop.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
-                                  <input
-                                    type="text"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="Dob"
-                                    required
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-
-                              <div class="col-md-6">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">Shop Name</h6>
-                                  {/* <img src="images/icons/shop.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
-                                  <input
-                                    type="text"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="ShopName"
-                                    required
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-
-                              <div class="col-md-6">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">Shop Location</h6>
-                                  {/* <img src="images/icons/map-pin.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
-                                  <input
-                                    type="text"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="shoplocation"
-                                    required
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-
-                              <div class="col-md-6">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">
-                                    Shop Registration Details
-                                  </h6>
-                                  {/* <img src="images/icons/phone.svg" className="fea icon-sm icons" id="okay" alt="phone" /> */}
-                                  <input
-                                    type="text"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="ShopRegistration"
-                                    required
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-
-                              <div class="col-md-6">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">Address</h6>
-                                  {/* <img src="images/icons/mail.svg" className="fea icon-sm icons" id="okay" alt="address" /> */}
-                                  <input
-                                    type="text"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="Address"
-                                    required
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-
-                              <div class="col-md-6">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">Location on Map</h6>
-                                  {/* <img src="images/icons/map-pin.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
-                                  <input
-                                    type="text"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="locationonMap"
-                                    required
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-
-                              <div class="col-md-6">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">Number of Employees</h6>
-                                  {/* <img src="images/icons/shop.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
-                                  <input
-                                    type="text"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="NumberEmployees"
-                                    required
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-
-                              <div class="col-md-6">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">Next in Command</h6>
-                                  {/* <img src="images/icons/map-pin.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
-                                  <input
-                                    type="text"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="NextinCommand"
-                                    required
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-
-                              <div class="col-md-6">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">Manager’s Number</h6>
-                                  {/* <img src="images/icons/hash.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
-                                  <input
-                                    type="number"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="ManagerNumber"
-                                    required
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-
-                              <div class="col-md-12">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">Cover Photo</h6>
-                                  {/* <img src="images/icons/file-text.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
-                                  <input
-                                    type="file"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="Certificate"
-                                    required
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-
-                              <div class="col-md-12">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">Owner Ghana Card </h6>
-                                  {/* <img src="images/icons/file-text.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
-                                  <input
-                                    type="file"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="Certificate"
-                                    required
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-
-                              <div class="col-md-12">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">
-                                    Company's Certificate
-                                  </h6>
-                                  {/* <img src="images/icons/file-text.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
-                                  <input
-                                    type="file"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="Certificate"
-                                    required
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-
-                              <div class="col-md-6">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">Username</h6>
-                                  {/* <img src="images/icons/user.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
-                                  <input
-                                    type="text"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="Username"
-                                    required
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-
-                              <div class="col-md-6">
-                                <div class="form-group position-relative">
-                                  <h6 className="size">Password</h6>
-                                  {/* <img src="images/icons/key.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
-                                  <input
-                                    type="password"
-                                    class="form-control pl-5"
-                                    placeholder=""
-                                    name="Password"
-                                    required
-                                  />
-                                </div>
-                              </div>
-                              {/* <!--end col--> */}
-
-                              {/* <div className="col-lg-12 mb-0">
-                                                                <button onClick={() =>
-                                                                    swal(
-                                                                        "Good job!",
-                                                                        "You clicked the button!",
-                                                                        "success"
-                                                                    )
-                                                                } className="btn btn-block" id="login">Add Vendor</button>
-                                                            </div> */}
-                              {/* // <!--end col--> */}
-                            </div>
-                            {/* <!--end row--> */}
-                          </form>
-                        </div>
-                        {/* <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                                </div> */}
+                              {/* <!--end row--> */}
+                            </form>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -985,6 +804,7 @@ const AddVendor = () => {
                                       id="editIcon"
                                       data-bs-toggle="modal"
                                       data-bs-target="#basicModal"
+                                      onClick={() => HandleUpdate(vendor.id)}
                                     >
                                       <i class="fas fa-eye"></i>
                                     </Link>
