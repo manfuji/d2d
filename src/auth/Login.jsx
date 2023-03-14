@@ -43,18 +43,12 @@ const Login = () => {
     // currentUser = await (await LoginApi(formInput)).data;
   };
   useEffect(() => {
-    if (user && user.is_superuser) {
-      navigate("/superadmin_dashboard");
-      console.log("===================1", user);
-    }
-    if (user && user.is_vendor) {
-      navigate("/dashboard");
-      console.log("===================2", user);
-    }
-    if (user && user.is_user) {
-      navigate("/users-dashboard");
-      console.log("===================3", user);
-    }
+    if (user && user.is_superuser) return navigate("/superadmin_dashboard");
+
+    if (user && user.is_vendor) return navigate("/dashboard");
+
+    if (user && user.is_user) return navigate("/users-dashboard");
+
     // if (user && user.is_superadmin) return navigate("/superadmin");
   }, [user, navigate]);
 

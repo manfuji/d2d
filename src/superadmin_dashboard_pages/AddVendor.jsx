@@ -107,19 +107,10 @@ const AddVendor = () => {
         setCreatedVendor(response.data);
         // setLoading(false);
         setCreated(true);
-        <MessageAlert
-          title={"Created"}
-          message={"Vendor created sucessfully"}
-          type={"success"}
-        />;
+
+        swal("Created", "Vendor created sucessfully", "success");
       })
-      .catch((err) => (
-        <MessageAlert
-          title={"failed"}
-          message={err.data.detail}
-          type={"success"}
-        />
-      ));
+      .catch((err) => swal("Vendor", "Vendor creation Failed", "error"));
   };
 
   console.log(createdVendor);

@@ -19,7 +19,7 @@ const AddProduct = () => {
   const [loading, setLoading] = useState(true);
   const [created, setCreated] = useState(false);
   const [category, setCategory] = useState([]);
-
+  const [image, setImage] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,20 +46,21 @@ const AddProduct = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const body = {
-      name: formData.name,
-      price: Number(formData.price),
-      product_size: formData.product_size,
-      in_stock: formData.in_stock,
-      shop: userId,
-      category: Number(formData.category),
-    };
-    console.log(body);
+    const formdata = new FormData();
+    formdata.append("name", formData.name);
+    formdata.append("price", Number(formData.price));
+    formdata.append("product_size", formData.product_size);
+    formdata.append("in_stock", formData.in_stock);
+    formdata.append("shop", userId);
+    formdata.append("category", Number(formData.category));
+    formdata.append("image", image);
+
+    // console.log(body);
 
     axios
-      .post(process.env.REACT_APP_BASE_URL + "/shop/product/", body, config)
+      .post(process.env.REACT_APP_BASE_URL + "/shop/product/", formdata, config)
       .then((response) => {
-        // setLoading(false);
+        setLoading(false);
         swal("Submitted!", "Product created!", "success");
 
         setCreated(true);
@@ -536,7 +537,20 @@ const AddProduct = () => {
                               <option value="No">No</option>
                             </select>
                           </div>
-
+                          <div class="col-md-12">
+                            <div class="form-group position-relative">
+                              <h6 className="size">Cover Photo</h6>
+                              {/* <img src="images/icons/file-text.svg" className="fea icon-sm icons" id="okay" alt="mail" /> */}
+                              <input
+                                type="file"
+                                class="form-control pl-5"
+                                placeholder=""
+                                name="Certificate"
+                                required
+                                onChange={(e) => setImage(e.target.files[0])}
+                              />
+                            </div>
+                          </div>
                           <div className="form-group">
                             <label className="mb-1 ">
                               <h6 className="text-muted">Product Size</h6>

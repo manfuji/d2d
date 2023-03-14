@@ -127,8 +127,8 @@ const OrderList = () => {
                 </div>
               </div>
             </div>
-            <hr />
-            <div className="row">
+            {/* <hr /> */}
+            {/* <div className="row">
               <div className="col-12">
                 <div className="card">
                   <div className="card-body">
@@ -365,12 +365,12 @@ const OrderList = () => {
                   </div>
                 </div>
               </div>
-            </div>
-            <hr />
-            <br />
-            <OrderCard title="Confirmed Orders" />
-            <OrderCard title="Order in Progress" />
-            <OrderCard title="Order Delivered" />
+            </div> */}
+            {/* <hr />
+            <br /> */}
+            <OrderCard title="Incoming Orders" />
+            <OrderCard title="Processing Order" />
+            <OrderCard title="Confirm Order" />
             {/* <OrderCard /> */}
           </div>
         </div>
